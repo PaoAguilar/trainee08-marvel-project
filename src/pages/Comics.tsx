@@ -4,6 +4,8 @@ import ComicInfo from '../components/ComicInfo';
 import { getComics } from '../config/actions';
 import { Comic } from '../types/interfaces';
 
+import '../styles/comics.scss';
+
 const Comics = () => {
   const [comics, setComics] = useState<Comic[]>([]);
 
@@ -20,7 +22,6 @@ const Comics = () => {
 
   return (
     <div>
-      <h1>COMICS</h1>
       <div className="comics">
         {comics.map((comic: Comic) => {
           return <ComicInfo key={comic.id} comic={comic} />;
