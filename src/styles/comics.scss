@@ -1,52 +1,39 @@
 .comics {
-  width: 100%;
-  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 100vw;
   padding: 6rem 8rem 3rem 8rem;
 
   &__container {
-    display: inline-block;
+    color: black;
+  }
+
+  &__image {
     border: 3px solid white;
     width: 20rem;
     height: 21rem;
-    margin-right: 15px;
-    margin-bottom: 15px;
-    margin-top: 5rem;
-    font-size: 20px;
-    cursor: pointer;
-  }
 
-  &__container:hover {
-    width: 19rem;
-    height: 20rem;
-  }
-
-  &__info {
-    background-color: white;
-    // border: 3px solid white;
-    max-width: 100%;
-    height: 4rem;
-    opacity: 0.6;
-    color: black;
-    font-size: 1rem;
-
-    p {
+    img {
       width: 100%;
-      font-weight: bolder;
-      text-align: justify;
-      text-justify: inter-word;
+      height: 100%;
+      object-fit: fill;
+      -webkit-filter: grayscale(80%) !important;
+      filter: grayscale(80%) !important;
+    }
+
+    img:hover {
+      -webkit-filter: grayscale(0) !important;
+      filter: grayscale(0) !important;
     }
   }
 
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: fill;
-
-    -webkit-filter: grayscale(80%) !important;
-    filter: grayscale(80%) !important;
-  }
-  img:hover {
-    -webkit-filter: grayscale(0) !important;
-    filter: grayscale(0) !important;
+  &__info {
+    width: 20rem;
+    height: 3rem;
+    border: 3px solid white;
+    background-color: white;
+    margin-bottom: 1rem;
+    opacity: 0.6;
   }
 }

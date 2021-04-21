@@ -4,11 +4,16 @@ import { Comic } from '../types/interfaces';
 const ComicInfo = ({ comic }: { comic: Comic }) => {
   return (
     <div className="comics__container">
+      <div className="comics__image">
       <img
         alt="comic"
         src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
       />
-      <div className="comics__info">{comic.title}</div>
+      </div>
+      
+      <div className="comics__info">
+        <span>{comic.title}</span>
+        </div>
       {/* <div className="comics__info">Info</div> */}
     </div>
   );

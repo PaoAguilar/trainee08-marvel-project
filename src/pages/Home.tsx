@@ -1,19 +1,44 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-
+import CharactersImg from '../img/characters.png';
+import ComicsImg from '../img/comics.png';
+import StoriesImg from '../img/stories.png';
 import '../styles/home.scss';
+import Stories from './Stories';
 
 const Home = () => {
-
-    const history = useHistory();
-    return (
-        <div>
-            <h1>HOME</h1>
-            <button type="button" onClick={() => {history.push("/characters")}}>Characters</button>
-            <button type="button" onClick={() => {history.push("/comics")}}>Comics</button>
-            <button type="button" onClick={() => {history.push("/stories")}}>Stories</button>
-        </div>
-    );
+  const history = useHistory();
+  return (
+    <div className="home">
+      <div className="home__images">
+        <img
+          src={CharactersImg}
+          alt="characters"
+          onClick={() => {
+            history.push('/characters');
+          }}
+        />
+      </div>
+      <div className="home__images">
+        <img
+          src={ComicsImg}
+          alt="comics"
+          onClick={() => {
+            history.push('/comics');
+          }}
+        />
+      </div>
+      <div className="home__images">
+        <img
+          src={StoriesImg}
+          alt="stories"
+          onClick={() => {
+            history.push('/stories');
+          }}
+        />
+      </div>
+    </div>
+  );
 };
 
 export default Home;

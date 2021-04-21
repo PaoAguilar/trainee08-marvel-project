@@ -22,7 +22,7 @@ const Comics = () => {
 
   return (
     <div>
-      <div className="comics">
+      <div className="comics" >
         {comics.map((comic: Comic) => {
           return <ComicInfo key={comic.id} comic={comic} />;
         })}
