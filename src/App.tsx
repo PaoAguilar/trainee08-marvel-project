@@ -6,6 +6,7 @@ import Characters from './pages/Characters';
 import Comics from './pages/Comics';
 import Stories from './pages/Stories';
 import Layout from './components/Layout';
+import HeaderProvider from './context/GlobalContext';
 
 function App() {
   return (
@@ -15,15 +16,17 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route exact path="/characters">
-            <Characters />
-          </Route>
-          <Route exact path="/comics">
-            <Comics />
-          </Route>
-          <Route exact path="/stories">
-            <Stories />
-          </Route>
+          <HeaderProvider>
+            <Route exact path="/characters">
+              <Characters />
+            </Route>
+            <Route exact path="/comics">
+              <Comics />
+            </Route>
+            <Route exact path="/stories">
+              <Stories />
+            </Route>
+          </HeaderProvider>
         </Layout>
       </Router>
     </div>

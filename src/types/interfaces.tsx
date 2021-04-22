@@ -23,3 +23,17 @@ export interface Story {
 export interface ChildrenProps {
   children: ReactNode;
 }
+
+export interface TypesContext {
+    Characters: {
+      characters: Character[]
+    },
+    Stories: {
+      stories: Story[]
+    },
+    Comics: {
+      comics: Comic[]
+    },
+}
+  
+

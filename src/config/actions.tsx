@@ -8,7 +8,7 @@ const fetchingData = async (endpoint: string) => {
   try {
     const res = await fetch(endpoint);
     const data = await res.json();
-    return data.data.results;
+    return data;
   } catch (error) {
     console.log(error);
   }
