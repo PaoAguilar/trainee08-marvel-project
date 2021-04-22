@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import StoryInfo from '../components/StoryInfo';
+import StoryCard from '../components/StoryCard';
 import { getStories } from '../config/actions';
 import { Story } from '../types/interfaces';
 import '../styles/stories.scss';
@@ -23,7 +23,7 @@ const Stories = () => {
       <h1>STORIES</h1>
       <div className="stories">
         {state.stories?.map((story: Story) => {
-          return <StoryInfo key={story.id} story={story} />;
+          return <StoryCard key={story.id} story={story} />;
         })}
       </div>
     </div>

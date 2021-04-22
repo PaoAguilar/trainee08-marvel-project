@@ -7,6 +7,7 @@ import Comics from './pages/Comics';
 import Stories from './pages/Stories';
 import Layout from './components/Layout';
 import HeaderProvider from './context/GlobalContext';
+import CharacterInfo from './pages/CharacterInfo';
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
           <HeaderProvider>
             <Route exact path="/characters">
               <Characters />
+            </Route>
+            <Route exact path="/characters/:characterId">
+              <CharacterInfo />
             </Route>
             <Route exact path="/comics">
               <Comics />

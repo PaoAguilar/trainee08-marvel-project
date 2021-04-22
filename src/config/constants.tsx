@@ -6,7 +6,8 @@ const KEY = `ts=${TS}&apikey=${API_KEY}&hash=${HASH}`;
 const GET_LIST = `${BASE_URL}:endpoint?${KEY}`;
 
 export const CHARACTERS_ENDPOINTS = {
-  GET_CHARACTERS: GET_LIST.replace(':endpoint', 'characters'),
+  GET_LIST_OF_CHARACTERS: GET_LIST.replace(':endpoint', 'characters'),
+  GET_CHARACTER:`${BASE_URL}characters/:id?${KEY}`,
   GET_CHARACTERS_COMICS: `${BASE_URL}characters/:id/comics?${KEY}`,
   GET_CHARACTERS_STORIES: `${BASE_URL}characters/:id/stories?${KEY}`,
   FILTER_CHARACTERS_BY_NAME: `${BASE_URL}characters?nameStartsWith=:word&${KEY}`,

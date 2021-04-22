@@ -38,3 +38,36 @@
     opacity: 0.6;
   }
 }
+
+.character {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 7rem 0 3rem 0;
+
+  &__image {
+    width: 20rem;
+    height: 20rem;
+    border: 3px solid white;
+    margin-right: 4rem;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+    }
+  }
+
+  &__info {
+    max-width: 30rem;
+    height: 8rem;
+    color: black;
+    background-color: #adadad;
+    padding: 0 1rem 0 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0.8;
+  }
+}

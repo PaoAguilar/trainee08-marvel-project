@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect } from 'react';
-import ComicInfo from '../components/ComicInfo';
+import ComicCard from '../components/ComicCard';
 import { getComics } from '../config/actions';
 import { Comic } from '../types/interfaces';
 
@@ -25,7 +25,7 @@ const Comics = () => {
       <h1>COMICS</h1>
       <div className="comics">
         {state.comics?.map((comic: Comic) => {
-          return <ComicInfo key={comic.id} comic={comic} />;
+          return <ComicCard key={comic.id} comic={comic} />;
         })}
       </div>
     </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story } from '../types/interfaces';
 
-const StoryInfo = ({ story }: { story: Story }) => {
+const StoryCard = ({ story }: { story: Story }) => {
   return (
     <div className="stories__container">
       <div className="stories__info">
@@ -12,4 +12,4 @@ const StoryInfo = ({ story }: { story: Story }) => {
   );
 };
 
-export default StoryInfo;
+export default StoryCard;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Comic } from '../types/interfaces';
 
-const ComicInfo = ({ comic }: { comic: Comic }) => {
+const ComicCard = ({ comic }: { comic: Comic }) => {
   return (
     <div className="comics__container">
       <div className="comics__image">
@@ -18,4 +18,4 @@ const ComicInfo = ({ comic }: { comic: Comic }) => {
   );
 };
 
-export default ComicInfo;
+export default ComicCard;

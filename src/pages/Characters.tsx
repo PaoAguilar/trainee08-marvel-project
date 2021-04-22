@@ -1,18 +1,20 @@
 import React, { useContext } from 'react';
 import { useEffect } from 'react';
-import CharactersInfo from '../components/CharactersInfo';
-import { getCharacters } from '../config/actions';
+import CharacterCard from '../components/CharacterCard';
+import { getListOfCharacters } from '../config/actions';
 import { Character } from '../types/interfaces';
 import '../styles/characters.scss';
 import { GlobalContext } from '../context/GlobalContext';
 
 const Characters = () => {
   const { state, dispatch } = useContext(GlobalContext);
-
+  const { characters } = state;
   useEffect(() => {
-    getCharacters().then((response) => {
+    getListOfCharacters().then((response) => {
+      // console.log(response.data.results);
+
       dispatch({
-        type: 'SET_CHARACTER',
+        type: 'LIST_OF_CHARACTER',
         payload: { characters: response.data.results },
       });
     });
@@ -22,8 +24,8 @@ const Characters = () => {
     <>
       <h1>CHARACTERS</h1>
       <div className="characters">
-        {state.characters?.map((character: Character) => {
-          return <CharactersInfo key={character.id} character={character} />;
+        {characters?.map((character: Character) => {
+          return <CharacterCard key={character.id} character={character} />;
         })}
       </div>
     </>

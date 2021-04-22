@@ -14,9 +14,13 @@ const fetchingData = async (endpoint: string) => {
   }
 };
 
-export const getCharacters = () => {
-  return fetchingData(CHARACTERS_ENDPOINTS.GET_CHARACTERS);
+export const getListOfCharacters = () => {
+  return fetchingData(CHARACTERS_ENDPOINTS.GET_LIST_OF_CHARACTERS);
 };
+
+export const getCharacter = (id: string) => {
+  return fetchingData(CHARACTERS_ENDPOINTS.GET_CHARACTER.replace(":id", `${id}`))
+}
 
 export const filterCharactersByName = (word: string) => {
   return fetchingData(
@@ -24,13 +28,13 @@ export const filterCharactersByName = (word: string) => {
   );
 };
 
-export const getCharactersComics = (id: number) => {
+export const getCharactersComics = (id: string) => {
   return fetchingData(
     CHARACTERS_ENDPOINTS.GET_CHARACTERS_COMICS.replace(':id', `${id}`)
   );
 };
 
-export const getCharacterStories = (id: number) => {
+export const getCharacterStories = (id: string) => {
   return fetchingData(
     CHARACTERS_ENDPOINTS.GET_CHARACTERS_STORIES.replace(':id', `${id}`)
   );
