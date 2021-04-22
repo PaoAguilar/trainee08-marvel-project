@@ -11,17 +11,14 @@ const Comics = () => {
 
   useEffect(() => {
     getComics().then((result) => {
-      console.log('Hello');
-      
       console.log(result);
-      // console.log(result[0].id);
-
       setComics(result);
     });
   }, []);
 
   return (
-    <div>
+    <div>    
+      <h1>COMICS</h1>  
       <div className="comics" >
         {comics.map((comic: Comic) => {
           return <ComicInfo key={comic.id} comic={comic} />;

@@ -14,7 +14,6 @@ const ComicInfo = ({ comic }: { comic: Comic }) => {
       <div className="comics__info">
         <span>{comic.title}</span>
         </div>
-      {/* <div className="comics__info">Info</div> */}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-.comics {
+.characters {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -13,7 +13,7 @@
   &__image {
     border: 3px solid white;
     width: 20rem;
-    height: 21rem;
+    height: 18rem;
 
     img {
       width: 100%;

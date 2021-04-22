@@ -2,6 +2,7 @@ import React from 'react';
 import { ChildrenProps } from '../types/interfaces';
 import '../styles/layout.scss';
 import { useHistory } from 'react-router-dom';
+import Header from './commons/Header';
 
 const Layout = ({ children }: ChildrenProps) => {
   const history = useHistory();
@@ -16,9 +17,10 @@ const Layout = ({ children }: ChildrenProps) => {
               onClick={() => {
                 history.push('/');
               }}
-            />
+            />            
           </div>
         </div>
+        <Header />
         {children}
       </div>
     </div>

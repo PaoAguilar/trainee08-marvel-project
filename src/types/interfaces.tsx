@@ -9,6 +9,15 @@ export interface Comic {
   }
 }
 
+export interface Character {
+  id: number,
+  name: string,
+  thumbnail : {
+      extension: string,
+      path: string
+  }
+}
+
 export interface ChildrenProps {
   children: ReactNode;
 }

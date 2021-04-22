@@ -4,7 +4,6 @@ import CharactersImg from '../img/characters.png';
 import ComicsImg from '../img/comics.png';
 import StoriesImg from '../img/stories.png';
 import '../styles/home.scss';
-import Stories from './Stories';
 
 const Home = () => {
   const history = useHistory();
