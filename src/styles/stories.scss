@@ -1,0 +1,27 @@
+.stories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 100vw;
+  margin-bottom: 1rem;
+  padding: 3rem 8rem 3rem 8rem;
+
+  &__container {
+    color: white;
+    cursor: pointer;
+    margin-bottom: 2rem;
+  }
+
+  &__info {
+    padding: 1rem;
+    border: 3px solid white;
+    width: 25rem;
+    height: 13rem;
+    background-color: #585858;
+    opacity: 0.8;
+    p {
+      text-align: justify;
+      text-justify: inter-word;
+    }
+  }
+}

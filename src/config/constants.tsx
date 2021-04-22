@@ -21,6 +21,6 @@ export const COMICS_ENDPOINTS = {
 };
 
 export const STORIES_ENDPOINTS = {
-  GET_STORIES: GET_LIST.replace(':endpointv', 'stories'),
+  GET_STORIES: GET_LIST.replace(':endpoint', 'stories'),
   GET_STORIES_COMICS: `${BASE_URL}stories/:id/comics?${KEY}`
 };
