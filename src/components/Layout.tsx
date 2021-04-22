@@ -1,11 +1,12 @@
 import React from 'react';
 import { ChildrenProps } from '../types/interfaces';
 import '../styles/layout.scss';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import Header from './commons/Header';
 
 const Layout = ({ children }: ChildrenProps) => {
   const history = useHistory();
+  const location = useLocation();
   return (
     <div className="content">
       <div className="content__wrap-info">
@@ -17,10 +18,10 @@ const Layout = ({ children }: ChildrenProps) => {
               onClick={() => {
                 history.push('/');
               }}
-            />            
+            />
           </div>
         </div>
-        <Header />
+        {location.pathname  === '/' ? <></> : <Header />}
         {children}
       </div>
     </div>
