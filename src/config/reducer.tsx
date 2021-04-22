@@ -3,10 +3,13 @@ import { Character, Comic, Story } from '../types/interfaces';
 export type Action = {
   type:
     | 'LIST_OF_CHARACTER'
+    | 'LIST_OF_COMICS'
     | 'SET_CHARACTER'
     | 'SET_CHARACTERS_COMICS'
     | 'SET_CHARACTER_STORIES'
     | 'SET_COMIC'
+    | 'SET_COMIC_CHARACTERS'
+    | 'SET_COMIC_STORIES'
     | 'SET_STORY';
   payload?: {
     characters?: Character[];
@@ -14,6 +17,9 @@ export type Action = {
     charactersComics?: Comic[];
     characterStories?: Story[];
     comics?: Comic[];
+    comic?: Comic;
+    comicCharacters?: Character[];
+    comicStories?: Story[];
     stories?: Story[];
   };
 };
@@ -24,6 +30,9 @@ export interface State {
   charactersComics?: Comic[] | null;
   characterStories?: Story[] | null;
   comics?: Comic[] | null;
+  comic?: Comic | null;
+  comicCharacters?: Character[] | null;
+  comicStories?: Story[] | null;
   stories?: Story[] | null;
 }
 
@@ -51,9 +60,24 @@ export const reducer = (state: State, action: Action): State => {
       if (characterStories) return { ...state, characterStories };
       break;
     }
-    case 'SET_COMIC': {
+    case 'LIST_OF_COMICS': {
       const comics = action.payload?.comics;
       if (comics) return { ...state, comics };
+      break;
+    }
+    case 'SET_COMIC': {
+      const comic = action.payload?.comic;
+      if (comic) return { ...state, comic };
+      break;
+    }
+    case 'SET_COMIC_CHARACTERS': {
+      const comicCharacters = action.payload?.comicCharacters;
+      if (comicCharacters) return { ...state, comicCharacters };
+      break;
+    }
+    case 'SET_COMIC_STORIES': {
+      const comicStories = action.payload?.comicStories;
+      if (comicStories) return { ...state, comicStories };
       break;
     }
     case 'SET_STORY': {

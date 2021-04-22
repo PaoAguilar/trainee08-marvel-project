@@ -14,7 +14,8 @@ export const CHARACTERS_ENDPOINTS = {
 };
 
 export const COMICS_ENDPOINTS = {
-  GET_COMICS: GET_LIST.replace(':endpoint', 'comics'),
+  GET_LIST_OF_COMICS: GET_LIST.replace(':endpoint', 'comics'),
+  GET_COMIC:`${BASE_URL}comics/:id?${KEY}`,
   FILTER_COMICS_BY_FORMAT: `${BASE_URL}comics?format=:format&${KEY}`,
   FILTER_COMICS_BY_TITLE: `${BASE_URL}comics?titleStartsWith=:word&${KEY}`,
   GET_COMICS_CHARACTERS: `${BASE_URL}comics/:id/characters?${KEY}`,

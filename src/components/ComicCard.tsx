@@ -1,9 +1,11 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { Comic } from '../types/interfaces';
 
 const ComicCard = ({ comic }: { comic: Comic }) => {
+  const history = useHistory();
   return (
-    <div className="comics__container">
+    <div className="comics__container" onClick={()=>{history.push(`/comics/${comic.id}`)}}>
       <div className="comics__image">
       <img
         alt="comic"

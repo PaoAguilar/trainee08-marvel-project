@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import ComicCard from '../components/ComicCard';
-import { getComics } from '../config/actions';
+import { getListOfComics } from '../config/actions';
 import { Comic } from '../types/interfaces';
 
 import '../styles/comics.scss';
@@ -12,9 +12,9 @@ const Comics = () => {
   const { state, dispatch } = useContext(GlobalContext);
 
   useEffect(() => {
-    getComics().then((response) => {
+    getListOfComics().then((response) => {
       dispatch({
-        type: 'SET_COMIC',
+        type: 'LIST_OF_COMICS',
         payload: { comics: response.data.results },
       });
     });

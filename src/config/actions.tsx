@@ -19,8 +19,10 @@ export const getListOfCharacters = () => {
 };
 
 export const getCharacter = (id: string) => {
-  return fetchingData(CHARACTERS_ENDPOINTS.GET_CHARACTER.replace(":id", `${id}`))
-}
+  return fetchingData(
+    CHARACTERS_ENDPOINTS.GET_CHARACTER.replace(':id', `${id}`)
+  );
+};
 
 export const filterCharactersByName = (word: string) => {
   return fetchingData(
@@ -40,8 +42,12 @@ export const getCharacterStories = (id: string) => {
   );
 };
 
-export const getComics = () => {
-  return fetchingData(COMICS_ENDPOINTS.GET_COMICS);
+export const getListOfComics = () => {
+  return fetchingData(COMICS_ENDPOINTS.GET_LIST_OF_COMICS);
+};
+
+export const getComic = (id: string) => {
+  return fetchingData(COMICS_ENDPOINTS.GET_COMIC.replace(':id', `${id}`));
 };
 
 export const filterComicsByFormat = (format: string) => {
@@ -56,13 +62,13 @@ export const filterComicsByTitle = (word: string) => {
   );
 };
 
-export const getComicsCharacters = (id: number) => {
+export const getComicsCharacters = (id: string) => {
   return fetchingData(
     COMICS_ENDPOINTS.GET_COMICS_CHARACTERS.replace(':id', `${id}`)
   );
 };
 
-export const getComicsStories = (id: number) => {
+export const getComicsStories = (id: string) => {
   return fetchingData(
     COMICS_ENDPOINTS.GET_COMICS_STORIES.replace(':id', `${id}`)
   );
