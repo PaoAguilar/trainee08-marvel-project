@@ -74,12 +74,25 @@ export const getComicsStories = (id: string) => {
   );
 };
 
-export const getStories = () => {
-  return fetchingData(STORIES_ENDPOINTS.GET_STORIES);
+export const getListOfStories = () => {
+  return fetchingData(STORIES_ENDPOINTS.GET_LIST_OF_STORIES);
 };
 
-export const getStoriesComics = (id: number) => {
+export const getStory = (id: string) => {
+  return fetchingData(
+    STORIES_ENDPOINTS.GET_STORY.replace(':id', `${id}`)
+  );
+};
+
+export const getStoriesComics = (id: string) => {
   return fetchingData(
     STORIES_ENDPOINTS.GET_STORIES_COMICS.replace(':id', `${id}`)
   );
 };
+
+export const getStoryCharacters = (id: string) => {
+  return fetchingData(
+    STORIES_ENDPOINTS.GET_STORY_CHARACTERS.replace(':id', `${id}`)
+  );
+};
+

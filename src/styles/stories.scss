@@ -25,3 +25,20 @@
     }
   }
 }
+
+.story {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 7rem 0 3rem 0;
+  color: black;
+  &__info {
+    width: 50rem;
+    height: 20rem;
+    background-color: #adadad;
+    border: 3px solid white;
+    opacity: 0.8;
+    // margin-right: 4rem;
+  }
+}

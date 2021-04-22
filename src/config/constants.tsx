@@ -23,6 +23,8 @@ export const COMICS_ENDPOINTS = {
 };
 
 export const STORIES_ENDPOINTS = {
-  GET_STORIES: GET_LIST.replace(':endpoint', 'stories'),
+  GET_LIST_OF_STORIES: GET_LIST.replace(':endpoint', 'stories'),
+  GET_STORY:`${BASE_URL}stories/:id?${KEY}`,
+  GET_STORY_CHARACTERS: `${BASE_URL}stories/:id/characters?${KEY}`,
   GET_STORIES_COMICS: `${BASE_URL}stories/:id/comics?${KEY}`
 };

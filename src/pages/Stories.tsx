@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import StoryCard from '../components/StoryCard';
-import { getStories } from '../config/actions';
+import { getListOfStories } from '../config/actions';
 import { Story } from '../types/interfaces';
 import '../styles/stories.scss';
 import { useContext } from 'react';
@@ -10,9 +10,9 @@ const Stories = () => {
   const { state, dispatch } = useContext(GlobalContext);
 
   useEffect(() => {
-    getStories().then((response) => {
+    getListOfStories().then((response) => {
       dispatch({
-        type: 'SET_STORY',
+        type: 'LIST_OF_STORIES',
         payload: { stories: response.data.results },
       });
     });
