@@ -10,7 +10,7 @@ export const CHARACTERS_ENDPOINTS = {
   GET_CHARACTER:`${BASE_URL}characters/:id?${KEY}`,
   GET_CHARACTERS_COMICS: `${BASE_URL}characters/:id/comics?limit=8&${KEY}`,
   GET_CHARACTERS_STORIES: `${BASE_URL}characters/:id/stories?limit=8&${KEY}`,
-  FILTER_CHARACTERS_BY_NAME: `${BASE_URL}characters?nameStartsWith=:word&${KEY}`,
+  FILTER_CHARACTERS_BY_NAME: `${BASE_URL}characters?nameStartsWith=:word&limit=:limit&offset=:offset&${KEY}`,
 };
 
 export const COMICS_ENDPOINTS = {

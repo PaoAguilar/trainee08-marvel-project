@@ -13,7 +13,7 @@ export type Action = {
     | 'SET_STORY'
     | 'LIST_OF_STORIES'
     | 'SET_STORY_COMICS'
-    | 'SET_STORY_CHARACTERS';
+    | 'SET_STORY_CHARACTERS'
   payload?: {
     characters?: Character[];
     character?: Character;
