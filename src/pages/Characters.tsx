@@ -23,7 +23,7 @@ const Characters = () => {
       setIsSearching(true);
       filterCharactersByName(debouncedSearchTerm, currentPage).then((response) => {
         console.log(response.data.results);
-        
+        setTotal(response.data.total);
         setIsSearching(false);
         dispatch({
           type: 'LIST_OF_CHARACTER',
@@ -34,14 +34,16 @@ const Characters = () => {
   }, [currentPage, debouncedSearchTerm, dispatch]);
 
   useEffect(() => {
-    getListOfCharacters(currentPage).then((response) => {
-      setTotal(response.data.total);
-      dispatch({
-        type: 'LIST_OF_CHARACTER',
-        payload: { characters: response.data.results },
+    if (debouncedSearchTerm) {return}else{
+      getListOfCharacters(currentPage).then((response) => {
+        setTotal(response.data.total);
+        dispatch({
+          type: 'LIST_OF_CHARACTER',
+          payload: { characters: response.data.results },
+        });
       });
-    });
-  }, [currentPage, dispatch]);
+    }
+  }, [currentPage, debouncedSearchTerm, dispatch]);
 
   const paginate = (page: number) => {
     setCurrentPage(page);
