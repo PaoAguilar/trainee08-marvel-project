@@ -24,9 +24,9 @@ const Characters = () => {
 
   const debouncedSearchTerm = useDebounce(searchTerm, 1000);
 
-  useEffect(() => {
+  useEffect(() => {    
     if (filterBy === '' || filterBy === 'Name') {
-      if (debouncedSearchTerm) {
+      if (searchTerm) {
         setIsSearching(true);
         filterCharactersByName(debouncedSearchTerm, currentPage).then(
           (response) => {
@@ -41,7 +41,7 @@ const Characters = () => {
         );
       }
     }else if (filterBy === 'Comic') {
-      if (debouncedSearchTerm) {
+      if (searchTerm) {
         filterCharactersByComic(debouncedSearchTerm, currentPage).then(
           (response) => {
             if(response) setTotal(response.data.total);
@@ -54,6 +54,7 @@ const Characters = () => {
         );
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, debouncedSearchTerm, dispatch, filterBy]);
 
   useEffect(() => {
@@ -74,6 +75,9 @@ const Characters = () => {
     setCurrentPage(page);
   };
   console.log(filterBy);
+  
+
+  const limitPage = total/8
 
   return (
     <>
@@ -81,15 +85,20 @@ const Characters = () => {
       <div className="search">
         <input
           type={filterBy === "Name" ? "text" : "number"}
+          value={searchTerm}
           className="search__input"
           placeholder="Search"
           disabled={filterBy===""}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => {setSearchTerm(e.target.value)} }
         />
         <select
           defaultValue="Select"
           className="search__select"
-          onChange={(e) => setFilterBy(e.target.value)}
+          onChange={(e) => {
+            setSearchTerm('');
+            setFilterBy(e.target.value);
+            setCurrentPage(1);
+          }}
         >
           <option disabled>Select</option>
           <option value="Name">Name</option>
@@ -103,7 +112,7 @@ const Characters = () => {
           return <CharacterCard key={character.id} character={character} />;
         })}
       </div>
-      <Pagination total={total} currentPage={currentPage} paginate={paginate} />
+      <Pagination total={limitPage} currentPage={currentPage} paginate={paginate} />
     </>
   );
 };
