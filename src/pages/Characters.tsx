@@ -1,7 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { useContext, useState } from 'react';
 import { useEffect } from 'react';
 import CharacterCard from '../components/CharacterCard';
-import { filterCharactersByName, getListOfCharacters } from '../config/actions';
+import {
+  filterCharactersByComic,
+  filterCharactersByName,
+  getListOfCharacters,
+} from '../config/actions';
 import { Character } from '../types/interfaces';
 import '../styles/characters.scss';
 import { GlobalContext } from '../context/GlobalContext';
@@ -12,29 +17,49 @@ const Characters = () => {
   const { state, dispatch } = useContext(GlobalContext);
   const [total, setTotal] = useState(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState<string>('');
   const [isSearching, setIsSearching] = useState(false);
+  const [filterBy, setFilterBy] = useState('');
   const { characters } = state;
 
   const debouncedSearchTerm = useDebounce(searchTerm, 1000);
 
   useEffect(() => {
-    if (debouncedSearchTerm) {
-      setIsSearching(true);
-      filterCharactersByName(debouncedSearchTerm, currentPage).then((response) => {
-        console.log(response.data.results);
-        setTotal(response.data.total);
-        setIsSearching(false);
-        dispatch({
-          type: 'LIST_OF_CHARACTER',
-          payload: { characters: response.data.results },
-        });
-      });
+    if (filterBy === '' || filterBy === 'Name') {
+      if (debouncedSearchTerm) {
+        setIsSearching(true);
+        filterCharactersByName(debouncedSearchTerm, currentPage).then(
+          (response) => {
+            console.log(response.data.results);
+            if(response) setTotal(response.data.total);
+            setIsSearching(false);
+            dispatch({
+              type: 'LIST_OF_CHARACTER',
+              payload: { characters: response.data.results },
+            });
+          }
+        );
+      }
+    }else if (filterBy === 'Comic') {
+      if (debouncedSearchTerm) {
+        filterCharactersByComic(debouncedSearchTerm, currentPage).then(
+          (response) => {
+            if(response) setTotal(response.data.total);
+            setIsSearching(false);
+            dispatch({
+              type: 'LIST_OF_CHARACTER',
+              payload: { characters: response.data.results },
+            });
+          }
+        );
+      }
     }
-  }, [currentPage, debouncedSearchTerm, dispatch]);
+  }, [currentPage, debouncedSearchTerm, dispatch, filterBy]);
 
   useEffect(() => {
-    if (debouncedSearchTerm) {return}else{
+    if (debouncedSearchTerm) {
+      return;
+    } else {
       getListOfCharacters(currentPage).then((response) => {
         setTotal(response.data.total);
         dispatch({
@@ -48,16 +73,29 @@ const Characters = () => {
   const paginate = (page: number) => {
     setCurrentPage(page);
   };
+  console.log(filterBy);
 
   return (
     <>
       <h1>CHARACTERS</h1>
       <div className="search">
         <input
-          className="search__name"
+          type={filterBy === "Name" ? "text" : "number"}
+          className="search__input"
           placeholder="Search"
-          onChange={e => setSearchTerm(e.target.value)}
+          disabled={filterBy===""}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
+        <select
+          defaultValue="Select"
+          className="search__select"
+          onChange={(e) => setFilterBy(e.target.value)}
+        >
+          <option disabled>Select</option>
+          <option value="Name">Name</option>
+          <option value="Comic">Comic</option>
+          <option value="Story">Story</option>
+        </select>
       </div>
       {isSearching && <div>Searching ...</div>}
       <div className="characters">

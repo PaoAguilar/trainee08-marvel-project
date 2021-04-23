@@ -73,17 +73,17 @@
 }
 
 .search {
-  // width: 100%;
-  // font-size: 2rem;
   padding: 0 8rem 0 8rem;
+  display: flex;
 
-  &__name {
-    // width: '100%';
-    // font-size: '2rem';
-    // padding: '0.4rem';
-    // margin-bottom: '10px';
-    width: 100%;
+  &__input {
+    width: 15rem;
     height: 2rem;
     font-size: 1rem;
+    margin-right: 1rem;
+  }
+
+  &__select {
+    width: 10rem;
   }
 }
