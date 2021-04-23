@@ -11,7 +11,7 @@ const Header = () => {
       <div
         className="header__buttons"
         onClick={() => {
-          history.push('./characters');
+          history.push('/characters');
         }}
       >
         Characters
@@ -19,7 +19,7 @@ const Header = () => {
       <div
         className="header__buttons"
         onClick={() => {
-          history.push('./comics');
+          history.push('/comics');
         }}
       >
         Comics
@@ -27,7 +27,7 @@ const Header = () => {
       <div
         className="header__buttons"
         onClick={() => {
-          history.push('./stories');
+          history.push('/stories');
         }}
       >
         Stories

@@ -14,8 +14,17 @@ const fetchingData = async (endpoint: string) => {
   }
 };
 
-export const getListOfCharacters = () => {
-  return fetchingData(CHARACTERS_ENDPOINTS.GET_LIST_OF_CHARACTERS);
+const getOffSetAndLimit = (page:number) =>{
+  const itemPerPage = 8
+  const indexOfLastItem = page * itemPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemPerPage;
+  const offSet = indexOfFirstItem;
+  return {itemPerPage, offSet}
+}
+
+export const getListOfCharacters = (page:number) => {
+  let numberOfItem = getOffSetAndLimit(page)
+  return fetchingData(CHARACTERS_ENDPOINTS.GET_LIST_OF_CHARACTERS.replace(':limit',`${numberOfItem.itemPerPage}`).replace(':offset',`${numberOfItem.offSet}`));
 };
 
 export const getCharacter = (id: string) => {
@@ -42,8 +51,9 @@ export const getCharacterStories = (id: string) => {
   );
 };
 
-export const getListOfComics = () => {
-  return fetchingData(COMICS_ENDPOINTS.GET_LIST_OF_COMICS);
+export const getListOfComics = (page:number) => {
+  let numberOfItem = getOffSetAndLimit(page)
+  return fetchingData(COMICS_ENDPOINTS.GET_LIST_OF_COMICS.replace(':limit',`${numberOfItem.itemPerPage}`).replace(':offset',`${numberOfItem.offSet}`));
 };
 
 export const getComic = (id: string) => {
@@ -74,8 +84,9 @@ export const getComicsStories = (id: string) => {
   );
 };
 
-export const getListOfStories = () => {
-  return fetchingData(STORIES_ENDPOINTS.GET_LIST_OF_STORIES);
+export const getListOfStories = (page:number) => {
+  let numberOfItem = getOffSetAndLimit(page)
+  return fetchingData(STORIES_ENDPOINTS.GET_LIST_OF_STORIES.replace(':limit',`${numberOfItem.itemPerPage}`).replace(':offset',`${numberOfItem.offSet}`));
 };
 
 export const getStory = (id: string) => {
