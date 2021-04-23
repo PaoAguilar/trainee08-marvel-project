@@ -11,6 +11,9 @@
     cursor: pointer;
     margin-bottom: 2rem;
   }
+  &__container:hover {
+    transform: scale(1.13);
+  }
 
   &__info {
     padding: 1rem;

@@ -61,13 +61,13 @@ const CharacterInfo = () => {
           <h2>{character?.description}</h2>
         </div>
       </div>
-      <h1>COMICS</h1>
+      {charactersComics?.length === 0 ? <> </> : <h1>COMICS</h1>}
       <div className="characters">
         {charactersComics?.map((comic: Comic) => {
           return <ComicCard key={comic.id} comic={comic} />;
         })}
       </div>
-      <h1>STORIES</h1>
+      {characterStories?.length === 0 ? <> </> : <h1>STORIES</h1>}
       <div className="stories">
         {characterStories?.map((story: Story) => {
           return <StoryCard key={story.id} story={story} />;
