@@ -6,7 +6,8 @@ export interface Comic {
   thumbnail : {
       extension: string,
       path: string
-  }
+  },
+  description: string
 }
 export interface Character {
   id: number,
@@ -14,11 +15,12 @@ export interface Character {
   thumbnail : {
       extension: string,
       path: string
-  }
+  },
+  description: string
 }
 export interface Story {
   id: number,
-  title: string,
+  title: string
 }
 export interface ChildrenProps {
   children: ReactNode;

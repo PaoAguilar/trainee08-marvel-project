@@ -56,6 +56,11 @@ const CharacterInfo = () => {
           <div><h2>{character?.name}</h2></div>
         </div>
       </div>
+      <div className="character__description">
+        <div className="character__text">
+          <h2>{character?.description}</h2>
+        </div>
+      </div>
       <h1>COMICS</h1>
       <div className="characters">
         {charactersComics?.map((comic: Comic) => {

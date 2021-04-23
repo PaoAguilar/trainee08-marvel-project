@@ -56,6 +56,15 @@ export const filterCharactersByComic = (comicId:string, page: number ) => {
   );
 };
 
+export const filterCharactersByStory = (storyId:string, page: number ) => {
+  let numberOfItem = getOffSetAndLimit(page);
+  return fetchingData(
+    CHARACTERS_ENDPOINTS.FILTER_CHARACTERS_BY_STORY.replace(':id', `${storyId}`)
+      .replace(':limit', `${numberOfItem.itemPerPage}`)
+      .replace(':offset', `${numberOfItem.offSet}`)
+  );
+};
+
 export const getCharactersComics = (id: string) => {
   return fetchingData(
     CHARACTERS_ENDPOINTS.GET_CHARACTERS_COMICS.replace(':id', `${id}`)

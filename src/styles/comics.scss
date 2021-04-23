@@ -9,6 +9,9 @@
     color: black;
     cursor: pointer;
   }
+  &__container:hover {
+    transform: scale(1.13);
+  }
 
   &__image {
     border: 3px solid white;
@@ -34,7 +37,7 @@
     height: 3rem;
     border: 3px solid white;
     background-color: white;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     opacity: 0.6;
   }
 }
@@ -69,5 +72,19 @@
     flex-direction: column;
     justify-content: center;
     opacity: 0.8;
+  }
+
+  &__description {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    // padding: 7rem 0 3rem 0;
+  }
+
+  &__text {
+    width: 40rem;
+    text-align: justify;
+    text-justify: inter-word;
   }
 }

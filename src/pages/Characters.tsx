@@ -5,6 +5,7 @@ import CharacterCard from '../components/CharacterCard';
 import {
   filterCharactersByComic,
   filterCharactersByName,
+  filterCharactersByStory,
   getListOfCharacters,
 } from '../config/actions';
 import { Character } from '../types/interfaces';
@@ -53,6 +54,23 @@ const Characters = () => {
           }
         );
       }
+    }else{
+      if (filterBy === 'Story'){
+        if (searchTerm) {
+          filterCharactersByStory(debouncedSearchTerm, currentPage).then(
+            (response) => {
+              console.log(response);
+              
+              if(response) setTotal(response.data.total);
+              setIsSearching(false);
+              dispatch({
+                type: 'LIST_OF_CHARACTER',
+                payload: { characters: response.data.results },
+              });
+            }
+          );
+        }
+      }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, debouncedSearchTerm, dispatch, filterBy]);
@@ -75,7 +93,6 @@ const Characters = () => {
     setCurrentPage(page);
   };
   console.log(filterBy);
-  
 
   const limitPage = total/8
 

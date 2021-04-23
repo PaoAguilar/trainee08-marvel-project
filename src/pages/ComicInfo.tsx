@@ -60,6 +60,11 @@ const ComicInfo = () => {
           </div>
         </div>
       </div>
+      <div className="comic__description">
+        <div className="comic__text">
+          <h2>{comic?.description}</h2>
+        </div>
+      </div>
       {comicCharacters?.length === 0 ? <> </> : <h1>CHARACTERS</h1>}
       <div className="characters">
         {comicCharacters?.map((character: Character) => {
