@@ -109,7 +109,7 @@ const Characters = () => {
           onChange={(e) => {setSearchTerm(e.target.value)} }
         />
         <select
-          defaultValue="Select"
+          defaultValue="Search By..."
           className="search__select"
           onChange={(e) => {
             setSearchTerm('');
@@ -117,7 +117,7 @@ const Characters = () => {
             setCurrentPage(1);
           }}
         >
-          <option disabled>Select</option>
+          <option disabled>Search By...</option>
           <option value="Name">Name</option>
           <option value="Comic">Comic</option>
           <option value="Story">Story</option>

@@ -7,7 +7,8 @@ export interface Comic {
       extension: string,
       path: string
   },
-  description: string
+  description: string,
+  format: string
 }
 export interface Character {
   id: number,

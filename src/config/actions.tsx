@@ -47,7 +47,7 @@ export const filterCharactersByName = (word: string, page: number) => {
   );
 };
 
-export const filterCharactersByComic = (comicId:string, page: number ) => {
+export const filterCharactersByComic = (comicId: string, page: number) => {
   let numberOfItem = getOffSetAndLimit(page);
   return fetchingData(
     CHARACTERS_ENDPOINTS.FILTER_CHARACTERS_BY_COMIC.replace(':id', `${comicId}`)
@@ -56,7 +56,7 @@ export const filterCharactersByComic = (comicId:string, page: number ) => {
   );
 };
 
-export const filterCharactersByStory = (storyId:string, page: number ) => {
+export const filterCharactersByStory = (storyId: string, page: number) => {
   let numberOfItem = getOffSetAndLimit(page);
   return fetchingData(
     CHARACTERS_ENDPOINTS.FILTER_CHARACTERS_BY_STORY.replace(':id', `${storyId}`)
@@ -91,15 +91,21 @@ export const getComic = (id: string) => {
   return fetchingData(COMICS_ENDPOINTS.GET_COMIC.replace(':id', `${id}`));
 };
 
-export const filterComicsByFormat = (format: string) => {
+export const filterComicsByFormat = (format: string, page: number) => {
+  let numberOfItem = getOffSetAndLimit(page);
   return fetchingData(
     COMICS_ENDPOINTS.FILTER_COMICS_BY_FORMAT.replace(':format', `${format}`)
+      .replace(':limit', `${numberOfItem.itemPerPage}`)
+      .replace(':offset', `${numberOfItem.offSet}`)
   );
 };
 
-export const filterComicsByTitle = (word: string) => {
+export const filterComicsByTitle = (word: string, page: number) => {
+  let numberOfItem = getOffSetAndLimit(page);
   return fetchingData(
     COMICS_ENDPOINTS.FILTER_COMICS_BY_TITLE.replace(':word', `${word}`)
+      .replace(':limit', `${numberOfItem.itemPerPage}`)
+      .replace(':offset', `${numberOfItem.offSet}`)
   );
 };
 
