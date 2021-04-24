@@ -2,15 +2,10 @@ import React from 'react';
 import NextImg from '../../img/next.png';
 import PrevImg from '../../img/prev.png';
 import '../../styles/pagination.scss';
-
-type Total = number;
-type Paginate = (p: number) => void;
-type CurrentPage = number;
-
-// interface PaginationInterface {
-//     total: number,
-//     paginate: (p: number) => void,
-//     currentPage: number
+// interface IPagination<T> {
+//   item: T;
+//   total: number;
+//   currentPage: number;
 // }
 
 const Pagination = ({
@@ -18,9 +13,9 @@ const Pagination = ({
   currentPage,
   paginate,
 }: {
-  total: Total;
-  currentPage: CurrentPage;
-  paginate: Paginate;
+  total: number;
+  currentPage: number;
+  paginate: (p: number) => void;
 }) => {
   return (
     <div className="pagination">
