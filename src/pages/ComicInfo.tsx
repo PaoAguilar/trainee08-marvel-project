@@ -1,6 +1,7 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CharacterCard from '../components/CharacterCard';
+import Pagination from '../components/commons/Pagination';
 import StoryCard from '../components/StoryCard';
 import {
   getComic,
@@ -13,7 +14,10 @@ import { Character, Story } from '../types/interfaces';
 const ComicInfo = () => {
   const { comicId } = useParams<{ comicId: string }>();
   const { state, dispatch } = useContext(GlobalContext);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [currentPageChar, setCurrentPageChar] = useState<number>(1);
   const { comic, comicCharacters, comicStories } = state;
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     getComic(comicId).then((response) => {
@@ -25,22 +29,32 @@ const ComicInfo = () => {
   }, [comicId, dispatch]);
 
   useEffect(() => {
-    getComicsCharacters(comicId).then((response) => {
+    getComicsCharacters(comicId, currentPageChar).then((response) => {
+      if (response) setTotal(response.data.total);
       dispatch({
         type: 'SET_COMIC_CHARACTERS',
         payload: { comicCharacters: response.data.results },
       });
     });
-  }, [comicId, dispatch]);
+  }, [comicId, currentPageChar, dispatch]);
 
   useEffect(() => {
-    getComicsStories(comicId).then((response) => {
+    getComicsStories(comicId, currentPage).then((response) => {
+      if (response) setTotal(response.data.total);
       dispatch({
         type: 'SET_COMIC_STORIES',
         payload: { comicStories: response.data.results },
       });
     });
-  }, [comicId, dispatch]);
+  }, [comicId, currentPage, dispatch]);
+
+  const paginate = (page: number) => {
+    setCurrentPage(page);
+  };
+  const paginateChar = (page: number) => {
+    setCurrentPageChar(page);
+  };
+  const limitPage = total / 8;
 
   return (
     <>
@@ -71,12 +85,27 @@ const ComicInfo = () => {
           return <CharacterCard key={character.id} character={character} />;
         })}
       </div>
+      {comicCharacters?.length === 0 ? (
+        <> </>
+      ) : (
+        <Pagination
+          total={limitPage}
+          currentPage={currentPageChar}
+          paginate={paginateChar}
+        />
+      )}
       {comicStories?.length === 0 ? <> </> : <h1>STORIES</h1>}
       <div className="stories">
         {comicStories?.map((story: Story) => {
           return <StoryCard key={story.id} story={story} />;
         })}
       </div>
+      {comicStories?.length === 0 ? <> </> :
+      <Pagination
+        total={limitPage}
+        currentPage={currentPage}
+        paginate={paginate}
+      />}
     </>
   );
 };

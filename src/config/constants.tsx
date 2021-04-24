@@ -20,15 +20,15 @@ export const COMICS_ENDPOINTS = {
   GET_COMIC: `${BASE_URL}comics/:id?${KEY}`,
   FILTER_COMICS_BY_FORMAT: `${BASE_URL}comics?format=:format&limit=:limit&offset=:offset&${KEY}`,
   FILTER_COMICS_BY_TITLE: `${BASE_URL}comics?titleStartsWith=:word&limit=:limit&offset=:offset&${KEY}`,
-  GET_COMICS_CHARACTERS: `${BASE_URL}comics/:id/characters?limit=8&${KEY}`,
-  GET_COMICS_STORIES: `${BASE_URL}comics/:id/stories?limit=8&${KEY}`,
+  GET_COMICS_CHARACTERS: `${BASE_URL}comics/:id/characters?limit=:limit&offset=:offset&${KEY}`,
+  GET_COMICS_STORIES: `${BASE_URL}comics/:id/stories?limit=:limit&offset=:offset&${KEY}`,
 };
 
 export const STORIES_ENDPOINTS = {
   GET_LIST_OF_STORIES: GET_LIST.replace(':endpoint', 'stories'),
   GET_STORY: `${BASE_URL}stories/:id?${KEY}`,
-  GET_STORY_CHARACTERS: `${BASE_URL}stories/:id/characters?limit=8&${KEY}`,
-  GET_STORIES_COMICS: `${BASE_URL}stories/:id/comics?limit=8&${KEY}`,
+  GET_STORY_CHARACTERS: `${BASE_URL}stories/:id/characters?limit=:limit&offset=:offset&${KEY}`,
+  GET_STORIES_COMICS: `${BASE_URL}stories/:id/comics?limit=:limit&offset=:offset&${KEY}`,
   FILTER_STORIES_BY_COMIC: `${BASE_URL}stories?comics=:id?limit=:limit&offset=:offset&${KEY}`,
 };
 
