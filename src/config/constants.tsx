@@ -8,8 +8,8 @@ const GET_LIST = `${BASE_URL}:endpoint?limit=:limit&offset=:offset&${KEY}`;
 export const CHARACTERS_ENDPOINTS = {
   GET_LIST_OF_CHARACTERS: GET_LIST.replace(':endpoint', 'characters'),
   GET_CHARACTER: `${BASE_URL}characters/:id?${KEY}`,
-  GET_CHARACTERS_COMICS: `${BASE_URL}characters/:id/comics?limit=8&${KEY}`,
-  GET_CHARACTERS_STORIES: `${BASE_URL}characters/:id/stories?limit=8&${KEY}`,
+  GET_CHARACTERS_COMICS: `${BASE_URL}characters/:id/comics?limit=:limit&offset=:offset&${KEY}`,
+  GET_CHARACTERS_STORIES: `${BASE_URL}characters/:id/stories?limit=:limit&offset=:offset&${KEY}`,
   FILTER_CHARACTERS_BY_NAME: `${BASE_URL}characters?nameStartsWith=:word&limit=:limit&offset=:offset&${KEY}`,
   FILTER_CHARACTERS_BY_COMIC: `${BASE_URL}comics/:id/characters?limit=:limit&offset=:offset&${KEY}`,
   FILTER_CHARACTERS_BY_STORY: `${BASE_URL}stories/:id/characters?limit=:limit&offset=:offset&${KEY}`,

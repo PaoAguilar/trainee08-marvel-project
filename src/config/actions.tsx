@@ -65,15 +65,21 @@ export const filterCharactersByStory = (storyId: string, page: number) => {
   );
 };
 
-export const getCharactersComics = (id: string) => {
+export const getCharactersComics = (id: string, page: number) => {
+  let numberOfItem = getOffSetAndLimit(page);
   return fetchingData(
     CHARACTERS_ENDPOINTS.GET_CHARACTERS_COMICS.replace(':id', `${id}`)
+      .replace(':limit', `${numberOfItem.itemPerPage}`)
+      .replace(':offset', `${numberOfItem.offSet}`)
   );
 };
 
-export const getCharacterStories = (id: string) => {
+export const getCharacterStories = (id: string, page: number) => {
+  let numberOfItem = getOffSetAndLimit(page);
   return fetchingData(
     CHARACTERS_ENDPOINTS.GET_CHARACTERS_STORIES.replace(':id', `${id}`)
+      .replace(':limit', `${numberOfItem.itemPerPage}`)
+      .replace(':offset', `${numberOfItem.offSet}`)
   );
 };
 
