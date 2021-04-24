@@ -25,14 +25,13 @@ const Characters = () => {
 
   const debouncedSearchTerm = useDebounce(searchTerm, 1000);
 
-  useEffect(() => {    
+  useEffect(() => {
     if (filterBy === '' || filterBy === 'Name') {
       if (searchTerm) {
         setIsSearching(true);
         filterCharactersByName(debouncedSearchTerm, currentPage).then(
           (response) => {
-            console.log(response.data.results);
-            if(response) setTotal(response.data.total);
+            if (response) setTotal(response.data.total);
             setIsSearching(false);
             dispatch({
               type: 'LIST_OF_CHARACTER',
@@ -41,11 +40,11 @@ const Characters = () => {
           }
         );
       }
-    }else if (filterBy === 'Comic') {
+    } else if (filterBy === 'Comic') {
       if (searchTerm) {
         filterCharactersByComic(debouncedSearchTerm, currentPage).then(
           (response) => {
-            if(response) setTotal(response.data.total);
+            if (response) setTotal(response.data.total);
             setIsSearching(false);
             dispatch({
               type: 'LIST_OF_CHARACTER',
@@ -54,14 +53,12 @@ const Characters = () => {
           }
         );
       }
-    }else{
-      if (filterBy === 'Story'){
+    } else {
+      if (filterBy === 'Story') {
         if (searchTerm) {
           filterCharactersByStory(debouncedSearchTerm, currentPage).then(
             (response) => {
-              console.log(response);
-              
-              if(response) setTotal(response.data.total);
+              if (response) setTotal(response.data.total);
               setIsSearching(false);
               dispatch({
                 type: 'LIST_OF_CHARACTER',
@@ -72,7 +69,7 @@ const Characters = () => {
         }
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, debouncedSearchTerm, dispatch, filterBy]);
 
   useEffect(() => {
@@ -92,21 +89,22 @@ const Characters = () => {
   const paginate = (page: number) => {
     setCurrentPage(page);
   };
-  console.log(filterBy);
 
-  const limitPage = total/8
+  const limitPage = total / 8;
 
   return (
     <>
       <h1>CHARACTERS</h1>
       <div className="search">
         <input
-          type={filterBy === "Name" ? "text" : "number"}
+          type={filterBy === 'Name' ? 'text' : 'number'}
           value={searchTerm}
           className="search__input"
           placeholder="Search"
-          disabled={filterBy===""}
-          onChange={(e) => {setSearchTerm(e.target.value)} }
+          disabled={filterBy === ''}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+          }}
         />
         <select
           defaultValue="Search By..."
@@ -124,12 +122,22 @@ const Characters = () => {
         </select>
       </div>
       {isSearching && <div>Searching ...</div>}
-      <div className="characters">
-        {characters?.map((character: Character) => {
-          return <CharacterCard key={character.id} character={character} />;
-        })}
-      </div>
-      <Pagination total={limitPage} currentPage={currentPage} paginate={paginate} />
+      {characters?.length === 0 ? (
+        <h1>No Results Found</h1>
+      ) : (
+        <>
+          <div className="characters">
+            {characters?.map((character: Character) => {
+              return <CharacterCard key={character.id} character={character} />;
+            })}
+          </div>
+          <Pagination
+            total={limitPage}
+            currentPage={currentPage}
+            paginate={paginate}
+          />
+        </>
+      )}
     </>
   );
 };

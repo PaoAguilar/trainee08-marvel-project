@@ -29,6 +29,7 @@ export const STORIES_ENDPOINTS = {
   GET_STORY: `${BASE_URL}stories/:id?${KEY}`,
   GET_STORY_CHARACTERS: `${BASE_URL}stories/:id/characters?limit=8&${KEY}`,
   GET_STORIES_COMICS: `${BASE_URL}stories/:id/comics?limit=8&${KEY}`,
+  FILTER_STORIES_BY_COMIC: `${BASE_URL}stories?comics=:id?limit=:limit&offset=:offset&${KEY}`,
 };
 
 export const formatList = [

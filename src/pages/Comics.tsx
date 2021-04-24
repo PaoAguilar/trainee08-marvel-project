@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import ComicCard from '../components/ComicCard';
-import { filterComicsByFormat, filterComicsByTitle, getListOfComics } from '../config/actions';
+import {
+  filterComicsByFormat,
+  filterComicsByTitle,
+  getListOfComics,
+} from '../config/actions';
 import { Comic } from '../types/interfaces';
 
 import '../styles/comics.scss';
 import { useContext } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 import Pagination from '../components/commons/Pagination';
-// import ComicInfo sfrom './ComicInfo';
 import useDebounce from '../hooks/useDebounce';
 import { formatList } from '../config/constants';
 
@@ -29,7 +32,6 @@ const Comics = () => {
         setIsSearching(true);
         filterComicsByTitle(debouncedSearchTerm, currentPage).then(
           (response) => {
-            console.log(response.data.results);
             if (response) setTotal(response.data.total);
             setIsSearching(false);
             dispatch({
@@ -44,7 +46,6 @@ const Comics = () => {
         setIsSearching(true);
         filterComicsByFormat(debouncedSearchTerm, currentPage).then(
           (response) => {
-            console.log(response.data.results);
             if (response) setTotal(response.data.total);
             setIsSearching(false);
             dispatch({
@@ -76,11 +77,7 @@ const Comics = () => {
     setCurrentPage(page);
   };
 
-  console.log(searchTerm);
-  
-
   const limitPage = total / 8;
-  console.log(filterBy);
   return (
     <div>
       <h1>COMICS</h1>
@@ -95,7 +92,11 @@ const Comics = () => {
           >
             <option disabled>Select Format</option>
             {formatList?.map((format, key) => {
-              return <option key={key} value={encodeURI(format)}>{format}</option>;
+              return (
+                <option key={key} value={encodeURI(format)}>
+                  {format}
+                </option>
+              );
             })}
           </select>
         ) : (
@@ -125,16 +126,22 @@ const Comics = () => {
         </select>
       </div>
       {isSearching && <div>Searching ...</div>}
-      <div className="comics">
-        {comics?.map((comic: Comic) => {
-          return <ComicCard key={comic.id} comic={comic} />;
-        })}
-      </div>
-      <Pagination
-        total={limitPage}
-        currentPage={currentPage}
-        paginate={paginate}
-      />
+      {comics?.length === 0 ? (
+        <h1>No Results Found</h1>
+      ) : (
+        <>
+          <div className="comics">
+            {comics?.map((comic: Comic) => {
+              return <ComicCard key={comic.id} comic={comic} />;
+            })}
+          </div>
+          <Pagination
+            total={limitPage}
+            currentPage={currentPage}
+            paginate={paginate}
+          />
+        </>
+      )}
     </div>
   );
 };

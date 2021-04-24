@@ -1,40 +1,108 @@
 import React, { useEffect, useState } from 'react';
 import StoryCard from '../components/StoryCard';
-import { getListOfStories } from '../config/actions';
+import { filterStoriesByComic, getListOfStories } from '../config/actions';
 import { Story } from '../types/interfaces';
 import '../styles/stories.scss';
 import { useContext } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 import Pagination from '../components/commons/Pagination';
+import useDebounce from '../hooks/useDebounce';
 
 const Stories = () => {
   const { state, dispatch } = useContext(GlobalContext);
   const [total, setTotal] = useState(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [isSearching, setIsSearching] = useState(false);
+  const [filterBy, setFilterBy] = useState('');
+  const { stories } = state;
+  const debouncedSearchTerm = useDebounce(searchTerm, 1000);
 
   useEffect(() => {
-    getListOfStories(currentPage).then((response) => {
-      setTotal(response.data.total);
-      dispatch({
-        type: 'LIST_OF_STORIES',
-        payload: { stories: response.data.results },
+    if (filterBy === 'Comic') {
+      if (searchTerm) {
+        setIsSearching(true);
+        filterStoriesByComic(debouncedSearchTerm, currentPage).then(
+          (response) => {
+            if (response) setTotal(response.data.total);
+            setIsSearching(false);
+            dispatch({
+              type: 'LIST_OF_STORIES',
+              payload: { stories: response.data.results },
+            });
+          }
+        );
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage, debouncedSearchTerm, dispatch, filterBy]);
+
+  useEffect(() => {
+    if (debouncedSearchTerm) {
+      return;
+    } else {
+      getListOfStories(currentPage).then((response) => {
+        setTotal(response.data.total);
+        dispatch({
+          type: 'LIST_OF_STORIES',
+          payload: { stories: response.data.results },
+        });
       });
-    });
-  }, [dispatch, currentPage]);
+    }
+  }, [dispatch, currentPage, debouncedSearchTerm]);
 
   const paginate = (page: number) => {
     setCurrentPage(page);
   };
 
+  const limitPage = total / 8;
+
   return (
     <div>
       <h1>STORIES</h1>
-      <div className="stories">
-        {state.stories?.map((story: Story) => {
-          return <StoryCard key={story.id} story={story} />;
-        })}
+
+      <div className="search">
+        <input
+          type="number"
+          value={searchTerm}
+          className="search__input"
+          placeholder="Search"
+          disabled={filterBy === ''}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+          }}
+        />
+        <select
+          defaultValue="Search By..."
+          className="search__select"
+          onChange={(e) => {
+            setSearchTerm('');
+            setFilterBy(e.target.value);
+            setCurrentPage(1);
+          }}
+        >
+          <option disabled>Search By...</option>
+          <option value="Comic">Comic</option>
+        </select>
       </div>
-      <Pagination total={total} currentPage={currentPage} paginate={paginate} />
+
+      {isSearching && <div>Searching ...</div>}
+      {stories?.length === 0  ? (
+        <h1>No Results Found</h1>
+      ) : (
+        <>
+          <div className="stories">
+            {stories?.map((story: Story) => {
+              return <StoryCard key={story.id} story={story} />;
+            })}
+          </div>
+          <Pagination
+            total={limitPage}
+            currentPage={currentPage}
+            paginate={paginate}
+          />
+        </>
+      )}
     </div>
   );
 };

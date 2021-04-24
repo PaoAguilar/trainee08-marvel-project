@@ -146,3 +146,12 @@ export const getStoryCharacters = (id: string) => {
     STORIES_ENDPOINTS.GET_STORY_CHARACTERS.replace(':id', `${id}`)
   );
 };
+
+export const filterStoriesByComic = (comicId: string, page: number) => {
+  let numberOfItem = getOffSetAndLimit(page);
+  return fetchingData(
+    STORIES_ENDPOINTS.FILTER_STORIES_BY_COMIC.replace(':id', `${comicId}`)
+      .replace(':limit', `${numberOfItem.itemPerPage}`)
+      .replace(':offset', `${numberOfItem.offSet}`)
+  );
+};
