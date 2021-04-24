@@ -130,6 +130,11 @@ const Comics = () => {
         <h1>No Results Found</h1>
       ) : (
         <>
+          <Pagination
+            total={limitPage}
+            currentPage={currentPage}
+            paginate={paginate}
+          />
           <div className="comics">
             {comics?.map((comic: Comic) => {
               return <ComicCard key={comic.id} comic={comic} />;

@@ -126,6 +126,11 @@ const Characters = () => {
         <h1>No Results Found</h1>
       ) : (
         <>
+          <Pagination
+            total={limitPage}
+            currentPage={currentPage}
+            paginate={paginate}
+          />
           <div className="characters">
             {characters?.map((character: Character) => {
               return <CharacterCard key={character.id} character={character} />;

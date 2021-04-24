@@ -1,5 +1,7 @@
 import React from 'react';
-import '../../styles/pagination.scss'
+import NextImg from '../../img/next.png';
+import PrevImg from '../../img/prev.png';
+import '../../styles/pagination.scss';
 
 type Total = number;
 type Paginate = (p: number) => void;
@@ -23,31 +25,33 @@ const Pagination = ({
   return (
     <div className="pagination">
       <div>
-        <button
-          type="button"
-          onClick={() => {
-            if (currentPage > 1) {
-              paginate(currentPage - 1);
-            }
-          }}
-        >
-          Prev
-        </button>
+        <div className="pagination__images">
+          <img
+            src={PrevImg}
+            alt="Previous"
+            onClick={() => {
+              if (currentPage > 1) {
+                paginate(currentPage - 1);
+              }
+            }}
+          />
+        </div>
+      </div>
+      <div className="pagination__number">
+        <h3>{currentPage}</h3>
       </div>
       <div>
-        <h1>{currentPage}</h1>
-      </div>
-      <div>
-        <button
-          type="button"
-          onClick={() => {
-            if (currentPage > 0 && currentPage < total) {
-              paginate(currentPage + 1);
-            }
-          }}
-        >
-          Next
-        </button>
+        <div className="pagination__images">
+          <img
+            src={NextImg}
+            alt="Next"
+            onClick={() => {
+              if (currentPage > 0 && currentPage < total) {
+                paginate(currentPage + 1);
+              }
+            }}
+          />
+        </div>
       </div>
     </div>
   );

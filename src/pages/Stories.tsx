@@ -87,10 +87,15 @@ const Stories = () => {
       </div>
 
       {isSearching && <div>Searching ...</div>}
-      {stories?.length === 0  ? (
+      {stories?.length === 0 ? (
         <h1>No Results Found</h1>
       ) : (
         <>
+          <Pagination
+            total={limitPage}
+            currentPage={currentPage}
+            paginate={paginate}
+          />
           <div className="stories">
             {stories?.map((story: Story) => {
               return <StoryCard key={story.id} story={story} />;
