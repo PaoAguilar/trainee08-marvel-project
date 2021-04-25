@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import { createContext, useReducer } from 'react';
 import { Action, reducer, State } from '../config/reducer';
 import { ChildrenProps } from '../types/interfaces';
@@ -22,6 +23,11 @@ export const GlobalContext = createContext<ContextInterface>({
   state: initialState,
   dispatch: () => {},
 });
+
+export const useGlobalContex = () => {
+  const authState = useContext(GlobalContext);
+  return authState;
+};
 
 const GlobalProvider = ({ children }: ChildrenProps) => {
   const [state, dispatch] = useReducer(reducer, initialState);

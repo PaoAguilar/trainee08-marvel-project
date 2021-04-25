@@ -1,12 +1,11 @@
 import React from 'react';
-import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import {GlobalContext} from '../context/GlobalContext';
+import { useGlobalContex } from '../context/GlobalContext';
 import { Character } from '../types/interfaces';
 
 const CharacterCard = ({ character }: { character: Character }) => {
   const history = useHistory();
-  const { dispatch } = useContext(GlobalContext);
+  const { dispatch } = useGlobalContex();
   // const [bookmark, setBookmark]: any = useLocalStorage('BOOKMARK', []);
   return (
     <div className="characters__container">

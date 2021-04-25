@@ -9,7 +9,7 @@ const Bookmarks = () => {
   const { state } = useContext(GlobalContext);
   const { characters, comics, stories } = state.bookmark;
 
-  // const item: any = window.localStorage.getItem('BOOKMARK');
+  // const item: any = window.localStorage.getItem('BOOKMARK',[]);
   // const response = JSON.parse(item);
   // console.log(response);
 
