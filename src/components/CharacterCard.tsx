@@ -25,12 +25,27 @@ const CharacterCard = ({ character }: { character: Character }) => {
           onClick={() => {
             dispatch({
               type: 'SET_BOOKMARK_CHARACTER',
-              payload: { bookmarkCharacter: character},
+              payload: { bookmarkCharacter: character },
             });
           }}
         >
           Bookmark {character.id}
         </p>
+        <button
+          onClick={() => {
+            dispatch({
+              type: 'REMOVE_BOOKMARK',
+              payload: {
+                removeBookmark: {
+                  type: 'CHARACTER',
+                  id: character.id,
+                },
+              },
+            });
+          }}
+        >
+          remove
+        </button>
       </div>
     </div>
   );

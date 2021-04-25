@@ -1,13 +1,11 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useGlobalContex } from '../context/GlobalContext';
-import useLocalStorage from '../hooks/useLocalStorage';
 import { Comic } from '../types/interfaces';
 
 const ComicCard = ({ comic }: { comic: Comic }) => {
   const history = useHistory();
   const { state,dispatch } = useGlobalContex();
-  const [bookmark, setBookmark]: any = useLocalStorage('BOOKMARK', []);
 
   return (
     <div className="comics__container">
@@ -29,7 +27,6 @@ const ComicCard = ({ comic }: { comic: Comic }) => {
               type: 'SET_BOOKMARK_COMIC',
               payload: { bookmarkComic: comic},
             })
-            console.log(state.bookmark.comics);
           }}
         >
           Bookmark {comic.id}

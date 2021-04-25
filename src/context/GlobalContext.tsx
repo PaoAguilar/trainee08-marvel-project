@@ -31,15 +31,6 @@ export const useGlobalContex = () => {
 
 const GlobalProvider = ({ children }: ChildrenProps) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  // const [bookmark, setBookmark] = useState({})
-  // const itemsData = JSON.parse(localStorage.getItem('BOOKMARKS'))
-  // useEffect(() => {
-  //   // const itemsData = JSON.parse(localStorage.getItem('BOOKMARKS'))
-  //   if (itemsData) {
-  //     setBookmark(bookmark)
-  //   }
-  // },[bookmark]);
-
   useEffect(() => {
     dispatch({
       type: 'GET_BOOKMARKS'

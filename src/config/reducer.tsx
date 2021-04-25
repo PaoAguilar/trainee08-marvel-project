@@ -18,6 +18,8 @@ export type Action = {
     | 'SET_BOOKMARK_COMIC'
     | 'SET_BOOKMARK_STORY'
     | 'GET_BOOKMARKS'
+    | 'REMOVE_BOOKMARK'
+    | `DELETE_ALL_BOOKMARKS`
     // | 'SET_BOOKMARK_ITEM'
   payload?: {
     characters?: Character[];
@@ -35,6 +37,10 @@ export type Action = {
     bookmarkCharacter?: Character;
     bookmarkComic?: Comic;
     bookmarkStory?: Story;
+    removeBookmark?: {
+      type: string;
+      id: number;
+    };
   };
 };
 
@@ -156,6 +162,46 @@ export const reducer = (state: State, action: Action): State => {
       if(localStorage.getItem('BOOKMARKS')){
         const bookmark = JSON.parse(localStorage.getItem('BOOKMARKS')!);
         return {...state, bookmark}
+      }
+      break;
+    }
+    case 'REMOVE_BOOKMARK': {
+      const bookmarkId = action.payload?.removeBookmark?.id;
+      const bookmarkType = action.payload?.removeBookmark?.type;
+      let bookmark;
+      if (bookmarkType === 'COMIC') {
+        const comics = state.bookmark.comics;
+        const newComics = comics.filter((el) => el.id !== bookmarkId);
+        bookmark = {
+          ...state.bookmark,
+          comics: newComics,
+        };
+      } else if (bookmarkType === 'CHARACTER') {
+        const characters = state.bookmark.characters;
+        const newCharacters = characters.filter((el) => el.id !== bookmarkId);
+        bookmark = {
+          ...state.bookmark,
+          characters: newCharacters,
+        };
+      } else if (bookmarkType === 'STORY') {
+        const stories = state.bookmark.stories;
+        const newStories = stories.filter((el) => el.id !== bookmarkId);
+        bookmark = {
+          ...state.bookmark,
+          stories: newStories,
+        };
+      }
+      if (bookmark) {
+        localStorage.setItem('BOOKMARKS', JSON.stringify(bookmark));
+        return { ...state, bookmark };
+      }
+      break;
+    }
+
+    case 'DELETE_ALL_BOOKMARKS': {
+      if (localStorage.getItem('BOOKMARKS')) {
+        localStorage.removeItem('BOOKMARKS');
+        return { ...state, bookmark:{comics:[],characters:[],stories:[]} };
       }
     }
   }
