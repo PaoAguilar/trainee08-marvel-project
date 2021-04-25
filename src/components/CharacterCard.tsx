@@ -1,24 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { getCharacter } from '../config/actions';
-import  useLocalStorage  from '../hooks/useLocalStorage';
+import {GlobalContext} from '../context/GlobalContext';
 import { Character } from '../types/interfaces';
 
 const CharacterCard = ({ character }: { character: Character }) => {
   const history = useHistory();
-  
-  
-  useEffect(()=>{
-    const item:any = window.localStorage.getItem('BOOKMARK');
-    const bookmarks = JSON.parse(item)
-    console.log(bookmarks);
-  },[])
-  
-  const [bookMark,setBookmark]:any = useLocalStorage('BOOKMARK', []);
+  const { dispatch } = useContext(GlobalContext);
+  // const [bookmark, setBookmark]: any = useLocalStorage('BOOKMARK', []);
   return (
-    <div
-      className="characters__container"
-    >
+    <div className="characters__container">
       <div className="characters__image">
         <img
           alt="character"
@@ -31,14 +22,16 @@ const CharacterCard = ({ character }: { character: Character }) => {
 
       <div className="characters__info">
         <span>{character.name}</span>
-        <p onClick={()=>{
-          console.log('hi');
-            getCharacter(`${character.id}`).then((response) => {
-              setBookmark([...bookMark, response.data.results]);
-              // setBookmark(response.data.results);
-              console.log(response.data.results);
-            })
-        }}>Bookmark {character.id}</p>
+        <p
+          onClick={() => {
+            dispatch({
+              type: 'SET_BOOKMARK_CHARACTER',
+              payload: { bookmarkCharacter: character},
+            });
+          }}
+        >
+          Bookmark {character.id}
+        </p>
       </div>
     </div>
   );

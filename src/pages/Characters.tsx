@@ -85,7 +85,7 @@ const Characters = () => {
       });
     }
   }, [currentPage, debouncedSearchTerm, dispatch]);
-
+  
   const paginate = (page: number) => {
     setCurrentPage(page);
   };

@@ -27,6 +27,15 @@
       text-justify: inter-word;
     }
   }
+
+  &__bookmark {
+    width: 27rem;
+    height: 3rem;
+    border: 3px solid white;
+    background-color: white;
+    opacity: 0.6;
+    color: black;
+  }
 }
 
 .story {

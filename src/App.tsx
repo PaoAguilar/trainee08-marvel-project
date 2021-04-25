@@ -10,6 +10,7 @@ import HeaderProvider from './context/GlobalContext';
 import CharacterInfo from './pages/CharacterInfo';
 import ComicInfo from './pages/ComicInfo';
 import StoryInfo from './pages/StoryInfo';
+import Bookmarks from './pages/Bookmarks';
 
 function App() {
   return (
@@ -37,6 +38,9 @@ function App() {
             </Route>
             <Route exact path="/stories/:storyId">
               <StoryInfo />
+            </Route>
+            <Route exact path="/bookmarks">
+              <Bookmarks />
             </Route>
           </HeaderProvider>
         </Layout>

@@ -14,6 +14,10 @@ export type Action = {
     | 'LIST_OF_STORIES'
     | 'SET_STORY_COMICS'
     | 'SET_STORY_CHARACTERS'
+    | 'SET_BOOKMARK_CHARACTER'
+    | 'SET_BOOKMARK_COMIC'
+    | 'SET_BOOKMARK_STORY'
+    // | 'SET_BOOKMARK_ITEM'
   payload?: {
     characters?: Character[];
     character?: Character;
@@ -27,6 +31,9 @@ export type Action = {
     story?: Story;
     storyComics?: Comic[];
     storyCharacters?: Character[];
+    bookmarkCharacter?: Character;
+    bookmarkComic?: Comic;
+    bookmarkStory?: Story;
   };
 };
 
@@ -43,7 +50,12 @@ export interface State {
   story?: Story | null;
   storyComics?: Comic[] | null;
   storyCharacters?: Character[] | null;
-}
+  bookmark: {
+    comics: Comic[],
+    characters: Character[],
+    stories: Story[]
+  }
+} 
 
 export const reducer = (state: State, action: Action): State => {
   const { type } = action;
@@ -108,6 +120,32 @@ export const reducer = (state: State, action: Action): State => {
       const storyCharacters = action.payload?.storyCharacters;
       if (storyCharacters) return { ...state, storyCharacters };
       break;
+    }
+    case 'SET_BOOKMARK_CHARACTER': {
+      const bookmarkCharacter = action.payload?.bookmarkCharacter!;
+      const bookmark = {
+        ...state.bookmark,
+        characters: [...state.bookmark.characters, bookmarkCharacter]
+      }
+      if (bookmarkCharacter) return { ...state, bookmark };
+      break;
+    }
+    case 'SET_BOOKMARK_COMIC': {
+      const bookmarkComic = action.payload?.bookmarkComic!;
+      const bookmark = {
+        ...state.bookmark,
+        comics: [...state.bookmark.comics, bookmarkComic]
+      }
+      if (bookmarkComic) return {...state, bookmark}
+      break;
+    }
+    case 'SET_BOOKMARK_STORY': {
+      const bookmarkStory = action.payload?.bookmarkStory!;
+      const bookmark = {
+        ...state.bookmark,
+        stories: [...state.bookmark.stories, bookmarkStory]
+      }
+      if (bookmarkStory) return {...state, bookmark}
     }
   }
   return { ...state };
