@@ -5,7 +5,6 @@ import { Story } from '../types/interfaces';
 
 const StoryCard = ({ story }: { story: Story }) => {
   const history = useHistory();
-  // const [bookmark, setBookmark]: any = useLocalStorage('BOOKMARK', []);
   const { dispatch } = useGlobalContex();
   
   return (

@@ -17,6 +17,7 @@ export type Action = {
     | 'SET_BOOKMARK_CHARACTER'
     | 'SET_BOOKMARK_COMIC'
     | 'SET_BOOKMARK_STORY'
+    | 'GET_BOOKMARKS'
     // | 'SET_BOOKMARK_ITEM'
   payload?: {
     characters?: Character[];
@@ -127,6 +128,7 @@ export const reducer = (state: State, action: Action): State => {
         ...state.bookmark,
         characters: [...state.bookmark.characters, bookmarkCharacter]
       }
+      localStorage.setItem('BOOKMARKS', JSON.stringify(bookmark));
       if (bookmarkCharacter) return { ...state, bookmark };
       break;
     }
@@ -136,6 +138,7 @@ export const reducer = (state: State, action: Action): State => {
         ...state.bookmark,
         comics: [...state.bookmark.comics, bookmarkComic]
       }
+      localStorage.setItem('BOOKMARKS', JSON.stringify(bookmark));
       if (bookmarkComic) return {...state, bookmark}
       break;
     }
@@ -145,7 +148,15 @@ export const reducer = (state: State, action: Action): State => {
         ...state.bookmark,
         stories: [...state.bookmark.stories, bookmarkStory]
       }
+      localStorage.setItem('BOOKMARKS', JSON.stringify(bookmark));
       if (bookmarkStory) return {...state, bookmark}
+      break;
+    }
+    case 'GET_BOOKMARKS': {
+      if(localStorage.getItem('BOOKMARKS')){
+        const bookmark = JSON.parse(localStorage.getItem('BOOKMARKS')!);
+        return {...state, bookmark}
+      }
     }
   }
   return { ...state };

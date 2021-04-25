@@ -9,19 +9,6 @@ const Bookmarks = () => {
   const { state } = useContext(GlobalContext);
   const { characters, comics, stories } = state.bookmark;
 
-  // const item: any = window.localStorage.getItem('BOOKMARK',[]);
-  // const response = JSON.parse(item);
-  // console.log(response);
-
-
-    // const bookmarksArray = []
-    // for (let i = 0; i < response.length; i++) {
-    //   const bookmarks = response[i].dataResults[0]
-    //   bookmarksArray.push(bookmarks);
-    // }
-
-  // console.log(bookmarksArray);
-
   return (
     <div>
       <h1>BOOKMARKS</h1>
