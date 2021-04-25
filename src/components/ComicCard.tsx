@@ -5,7 +5,7 @@ import { Comic } from '../types/interfaces';
 
 const ComicCard = ({ comic }: { comic: Comic }) => {
   const history = useHistory();
-  const { state,dispatch } = useGlobalContex();
+  const { dispatch } = useGlobalContex();
 
   return (
     <div className="comics__container">

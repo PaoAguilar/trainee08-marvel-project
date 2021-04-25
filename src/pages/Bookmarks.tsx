@@ -3,6 +3,7 @@ import ComicCard from '../components/ComicCard';
 import StoryCard from '../components/StoryCard';
 import { useGlobalContex } from '../context/GlobalContext';
 import { Character, Comic, Story } from '../types/interfaces';
+import '../styles/bookmark.scss';
 
 const Bookmarks = () => {
   const { state, dispatch } = useGlobalContex();
@@ -10,30 +11,39 @@ const Bookmarks = () => {
 
   return (
     <div>
-      <h1>BOOKMARKS</h1>
-      <button
-        type="button"
-        onClick={() => {
-          dispatch({
-            type: 'DELETE_ALL_BOOKMARKS',
-          });
-        }}
-      >
-        Delete
-      </button>
-      <h2>Characters</h2>
+      <div className="bookmark">
+        <h1>BOOKMARKS</h1>
+        {characters?.length === 0 &&
+        comics?.length === 0 &&
+        stories?.length === 0 ? (
+          <> </>
+        ) : (
+          <button
+            className="bookmark__delete-all"
+            type="button"
+            onClick={() => {
+              dispatch({
+                type: 'DELETE_ALL_BOOKMARKS',
+              });
+            }}
+          >
+            Delete All Bookmarks
+          </button>
+        )}
+      </div>
+      {characters?.length === 0 ? <> </> : <h2>CHARACTERS</h2>}
       <div className="characters">
         {characters?.map((character: Character) => {
           return <CharacterCard key={character.id} character={character} />;
         })}
       </div>
-      <h2>Comics</h2>
+      {comics?.length === 0 ? <> </> : <h2>COMICS</h2>}
       <div className="comics">
         {comics?.map((comic: Comic) => {
           return <ComicCard key={comic.id} comic={comic} />;
         })}
       </div>
-      <h2>Stories</h2>
+      {stories?.length === 0 ? <> </> : <h2>STORIES</h2>}
       <div className="stories">
         {stories?.map((story: Story) => {
           return <StoryCard key={story.id} story={story} />;
