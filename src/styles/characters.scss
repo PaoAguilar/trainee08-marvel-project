@@ -40,6 +40,17 @@
     margin-bottom: 2rem;
     opacity: 0.6;
   }
+
+  &__bookmark {
+    display: flex;
+    flex-wrap: wrap;
+    height: 3rem;
+    // width: 4rem;
+    img {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
 }
 
 .character {

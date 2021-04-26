@@ -19,7 +19,8 @@ export type Action = {
     | 'SET_BOOKMARK_STORY'
     | 'GET_BOOKMARKS'
     | 'REMOVE_BOOKMARK'
-    | `DELETE_ALL_BOOKMARKS`
+    | 'DELETE_ALL_BOOKMARKS'
+    | 'SET_CLICK'
     // | 'SET_BOOKMARK_ITEM'
   payload?: {
     characters?: Character[];
@@ -41,6 +42,7 @@ export type Action = {
       type: string;
       id: number;
     };
+    click?: boolean;
   };
 };
 
@@ -61,7 +63,8 @@ export interface State {
     comics: Comic[],
     characters: Character[],
     stories: Story[]
-  }
+  },
+  click?: boolean
 } 
 
 export const reducer = (state: State, action: Action): State => {
@@ -197,12 +200,19 @@ export const reducer = (state: State, action: Action): State => {
       }
       break;
     }
-
     case 'DELETE_ALL_BOOKMARKS': {
       if (localStorage.getItem('BOOKMARKS')) {
         localStorage.removeItem('BOOKMARKS');
         return { ...state, bookmark:{comics:[],characters:[],stories:[]} };
       }
+      break;
+    }
+    case 'SET_CLICK': {
+      const click = action.payload?.click;
+      localStorage.setItem('CLICK', JSON.stringify(click));
+      // const clickState = [...state, click]
+      if (click === true) return {...state, click}
+      break;
     }
   }
   return { ...state };
