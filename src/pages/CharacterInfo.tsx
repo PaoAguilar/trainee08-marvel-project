@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
-import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+
+import { useEffect } from 'react';
 import ComicCard from '../components/ComicCard';
 import Pagination from '../components/commons/Pagination';
 import StoryCard from '../components/StoryCard';

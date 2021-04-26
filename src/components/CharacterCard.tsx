@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useGlobalContex } from '../context/GlobalContext';
-import { Character } from '../types/interfaces';
+
 import bookmarkAdd from '../img/bookwhite.png';
 import bookmarkRemove from '../img/bookblack.png';
+import { useGlobalContex } from '../context/GlobalContext';
+import { Character } from '../types/interfaces';
+
 
 const CharacterCard = ({ character }: { character: Character }) => {
   const history = useHistory();
@@ -35,10 +37,6 @@ const CharacterCard = ({ character }: { character: Character }) => {
                   type: 'SET_BOOKMARK_CHARACTER',
                   payload: { bookmarkCharacter: character },
                 });
-                // dispatch({
-                //   type: 'SET_CLICK',
-                //   payload: { click: true },
-                // });
                 setClick(true);
               }}
             />

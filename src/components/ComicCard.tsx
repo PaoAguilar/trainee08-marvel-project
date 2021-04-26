@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useGlobalContex } from '../context/GlobalContext';
-import { Comic } from '../types/interfaces';
+
 import bookmarkAdd from '../img/bookwhite.png';
 import bookmarkRemove from '../img/bookblack.png';
+import { useGlobalContex } from '../context/GlobalContext';
+import { Comic } from '../types/interfaces';
 
 const ComicCard = ({ comic }: { comic: Comic }) => {
   const history = useHistory();
@@ -68,7 +69,6 @@ const ComicCard = ({ comic }: { comic: Comic }) => {
                   },
                 },
               });
-              // setClick(false);
             }}
           >
             hide

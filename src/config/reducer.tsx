@@ -22,7 +22,6 @@ export type Action = {
     | 'DELETE_ALL_BOOKMARKS'
     | 'HIDE_RESOURCE'
     | 'SET_CLICK';
-  // | 'SET_BOOKMARK_ITEM'
   payload?: {
     characters?: Character[];
     character?: Character;

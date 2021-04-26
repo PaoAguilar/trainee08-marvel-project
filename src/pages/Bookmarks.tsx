@@ -3,6 +3,7 @@ import ComicCard from '../components/ComicCard';
 import StoryCard from '../components/StoryCard';
 import { useGlobalContex } from '../context/GlobalContext';
 import { Character, Comic, Story } from '../types/interfaces';
+
 import '../styles/bookmark.scss';
 
 const Bookmarks = () => {

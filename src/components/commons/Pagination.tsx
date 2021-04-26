@@ -1,12 +1,8 @@
 import React from 'react';
 import NextImg from '../../img/next.png';
 import PrevImg from '../../img/prev.png';
+
 import '../../styles/pagination.scss';
-// interface IPagination<T> {
-//   item: T;
-//   total: number;
-//   currentPage: number;
-// }
 
 const Pagination = ({
   total,

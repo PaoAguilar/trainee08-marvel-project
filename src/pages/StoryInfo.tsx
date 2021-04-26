@@ -1,5 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+
 import CharacterCard from '../components/CharacterCard';
 import ComicCard from '../components/ComicCard';
 import Pagination from '../components/commons/Pagination';
@@ -21,7 +22,6 @@ const StoryInfo = () => {
 
   useEffect(() => {
     getStory(storyId).then((response) => {
-      //   console.log(response.data.results);
       dispatch({
         type: 'SET_STORY',
         payload: { story: response.data.results[0] },
@@ -31,7 +31,6 @@ const StoryInfo = () => {
 
   useEffect(() => {
     getStoriesComics(storyId, currentPageComic).then((response) => {
-      console.log(response.data.results);
       if (response) setTotal(response.data.total);
       dispatch({
         type: 'SET_STORY_COMICS',
@@ -43,7 +42,6 @@ const StoryInfo = () => {
   useEffect(() => {
     getStoryCharacters(storyId, currentPage).then((response) => {
       if (response) setTotal(response.data.total);
-      console.log(response.data.results);
       dispatch({
         type: 'SET_STORY_CHARACTERS',
         payload: { storyCharacters: response.data.results },

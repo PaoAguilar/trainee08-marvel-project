@@ -1,8 +1,10 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+
 import CharactersImg from '../img/characters.png';
 import ComicsImg from '../img/comics.png';
 import StoriesImg from '../img/stories.png';
+
 import '../styles/home.scss';
 
 const Home = () => {

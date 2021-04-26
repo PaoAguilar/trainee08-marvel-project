@@ -1,9 +1,10 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { useGlobalContex } from '../context/GlobalContext';
-import { Story } from '../types/interfaces';
+
 import bookmarkAdd from '../img/bookwhite.png';
 import bookmarkRemove from '../img/bookblack.png';
+import { useGlobalContex } from '../context/GlobalContext';
+import { Story } from '../types/interfaces';
 import { useState } from 'react';
 
 const StoryCard = ({ story }: { story: Story }) => {

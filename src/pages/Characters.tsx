@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-import React, { useContext, useState } from 'react';
-import { useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+
 import CharacterCard from '../components/CharacterCard';
 import {
   filterCharactersByComic,
@@ -9,10 +9,11 @@ import {
   getListOfCharacters,
 } from '../config/actions';
 import { Character } from '../types/interfaces';
-import '../styles/characters.scss';
 import { GlobalContext } from '../context/GlobalContext';
 import Pagination from '../components/commons/Pagination';
 import useDebounce from '../hooks/useDebounce';
+
+import '../styles/characters.scss';
 
 const Characters = () => {
   const { state, dispatch } = useContext(GlobalContext);

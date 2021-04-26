@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+
 import CharacterCard from '../components/CharacterCard';
 import Pagination from '../components/commons/Pagination';
 import StoryCard from '../components/StoryCard';
@@ -10,7 +11,6 @@ import {
 } from '../config/actions';
 import { GlobalContext } from '../context/GlobalContext';
 import { Character, Story } from '../types/interfaces';
-
 
 const ComicInfo = () => {
   const { comicId } = useParams<{ comicId: string }>();
@@ -101,12 +101,15 @@ const ComicInfo = () => {
           return <StoryCard key={story.id} story={story} />;
         })}
       </div>
-      {comicStories?.length === 0 ? <> </> :
-      <Pagination
-        total={limitPage}
-        currentPage={currentPage}
-        paginate={paginate}
-      />}
+      {comicStories?.length === 0 ? (
+        <> </>
+      ) : (
+        <Pagination
+          total={limitPage}
+          currentPage={currentPage}
+          paginate={paginate}
+        />
+      )}
     </>
   );
 };

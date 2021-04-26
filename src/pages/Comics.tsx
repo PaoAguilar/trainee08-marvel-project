@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+
 import ComicCard from '../components/ComicCard';
 import {
   filterComicsByFormat,
   filterComicsByTitle,
   getListOfComics,
 } from '../config/actions';
-import { Comic } from '../types/interfaces';
-
-import '../styles/comics.scss';
-import { useContext } from 'react';
-import { GlobalContext } from '../context/GlobalContext';
 import Pagination from '../components/commons/Pagination';
 import useDebounce from '../hooks/useDebounce';
+import { Comic } from '../types/interfaces';
+import { GlobalContext } from '../context/GlobalContext';
 import { formatList } from '../config/constants';
+
+import '../styles/comics.scss';
 
 const Comics = () => {
   const { state, dispatch } = useContext(GlobalContext);

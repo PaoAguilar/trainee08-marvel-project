@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+
 import StoryCard from '../components/StoryCard';
 import { filterStoriesByComic, getListOfStories } from '../config/actions';
 import { Story } from '../types/interfaces';
-import '../styles/stories.scss';
-import { useContext } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 import Pagination from '../components/commons/Pagination';
 import useDebounce from '../hooks/useDebounce';
+
+import '../styles/stories.scss';
 
 const Stories = () => {
   const { state, dispatch } = useContext(GlobalContext);
