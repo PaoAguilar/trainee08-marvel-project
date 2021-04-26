@@ -15,8 +15,13 @@ const StoryCard = ({
   hideButton: boolean;
 }) => {
   const history = useHistory();
-  const { dispatch } = useGlobalContex();
-  const [click, setClick] = useState(false);
+  const { state, dispatch } = useGlobalContex();
+  const bookmarked = state.bookmark.stories.find(
+    (el) => el.id === story.id
+  )
+    ? true
+    : false;
+  const [click, setClick] = useState(bookmarked);
 
   return (
     <div className="stories__container">
