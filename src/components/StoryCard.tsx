@@ -4,10 +4,12 @@ import { useGlobalContex } from '../context/GlobalContext';
 import { Story } from '../types/interfaces';
 import bookmarkAdd from '../img/bookwhite.png';
 import bookmarkRemove from '../img/bookblack.png';
+import { useState } from 'react';
 
 const StoryCard = ({ story }: { story: Story }) => {
   const history = useHistory();
   const { dispatch } = useGlobalContex();
+  const [click, setClick] = useState(false);
 
   return (
     <div className="stories__container">
@@ -22,6 +24,7 @@ const StoryCard = ({ story }: { story: Story }) => {
       </div>
       <div className="stories__bookmark">
         <div className="characters__bookmark">
+        {click === false ? (
           <img
             src={bookmarkAdd}
             alt=""
@@ -30,8 +33,10 @@ const StoryCard = ({ story }: { story: Story }) => {
                 type: 'SET_BOOKMARK_STORY',
                 payload: { bookmarkStory: story },
               });
+              setClick(true);
             }}
           />
+          ) : (
           <img
             src={bookmarkRemove}
             alt=""
@@ -45,8 +50,10 @@ const StoryCard = ({ story }: { story: Story }) => {
                   },
                 },
               });
+              setClick(false);
             }}
           />
+          )}
           <button
             type="button"
             className="comics__hide"

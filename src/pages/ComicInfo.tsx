@@ -11,6 +11,7 @@ import {
 import { GlobalContext } from '../context/GlobalContext';
 import { Character, Story } from '../types/interfaces';
 
+
 const ComicInfo = () => {
   const { comicId } = useParams<{ comicId: string }>();
   const { state, dispatch } = useContext(GlobalContext);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useGlobalContex } from '../context/GlobalContext';
 import { Character } from '../types/interfaces';
@@ -8,8 +8,7 @@ import bookmarkRemove from '../img/bookblack.png';
 const CharacterCard = ({ character }: { character: Character }) => {
   const history = useHistory();
   const { dispatch } = useGlobalContex();
-  // const { click } = state;
-  // const [click, setClick] = useState(false);
+  const [click, setClick] = useState(false);
 
   return (
     <div className="characters__container">
@@ -27,39 +26,40 @@ const CharacterCard = ({ character }: { character: Character }) => {
       <div className="characters__info">
         <span>{character.name}</span>
         <div className="characters__bookmark">
-          {/* {click === false ? ( */}
-          <img
-            src={bookmarkAdd}
-            alt=""
-            onClick={() => {
-              dispatch({
-                type: 'SET_BOOKMARK_CHARACTER',
-                payload: { bookmarkCharacter: character },
-              });
-              dispatch({
-                type: 'SET_CLICK',
-                payload: { click: true },
-              });
-              // setClick(true);
-            }}
-          />
-          {/* ) : (  */}
-          <img
-            src={bookmarkRemove}
-            alt=""
-            onClick={() => {
-              dispatch({
-                type: 'REMOVE_BOOKMARK',
-                payload: {
-                  removeBookmark: {
-                    type: 'CHARACTER',
-                    id: character.id,
+          {click === false ? (
+            <img
+              src={bookmarkAdd}
+              alt=""
+              onClick={() => {
+                dispatch({
+                  type: 'SET_BOOKMARK_CHARACTER',
+                  payload: { bookmarkCharacter: character },
+                });
+                // dispatch({
+                //   type: 'SET_CLICK',
+                //   payload: { click: true },
+                // });
+                setClick(true);
+              }}
+            />
+          ) : (
+            <img
+              src={bookmarkRemove}
+              alt=""
+              onClick={() => {
+                dispatch({
+                  type: 'REMOVE_BOOKMARK',
+                  payload: {
+                    removeBookmark: {
+                      type: 'CHARACTER',
+                      id: character.id,
+                    },
                   },
-                },
-              });
-              // setClick(false);
-            }}
-          />
+                });
+                setClick(false);
+              }}
+            />
+          )}
           <button
             type="button"
             className="characters__hide"
@@ -77,7 +77,6 @@ const CharacterCard = ({ character }: { character: Character }) => {
           >
             hide
           </button>
-          {/* )}  */}
         </div>
       </div>
     </div>
