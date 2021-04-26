@@ -61,6 +61,7 @@ const StoryInfo = () => {
 
   return (
     <>
+    <h1>STORY INFORMATION</h1>
       <div className="story">
         <div className="story__info">
           <h1>Story ID: {story?.id}</h1>

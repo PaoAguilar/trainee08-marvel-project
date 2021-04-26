@@ -21,7 +21,6 @@ const CharacterInfo = () => {
   const { character, charactersComics, characterStories } = state;
   const [total, setTotal] = useState(0);
   const hideButton = true;
-  
 
   useEffect(() => {
     getCharacter(characterId).then((response) => {
@@ -62,6 +61,7 @@ const CharacterInfo = () => {
   const limitPage = total / 8;
   return (
     <>
+      <h1>CHARACTER INFORMATION</h1>
       <div className="character">
         <div className="character__image">
           <img

@@ -60,6 +60,7 @@ const ComicInfo = () => {
 
   return (
     <>
+      <h1>COMIC INFORMATION</h1>
       <div className="comic">
         <div className="comic__image">
           <img
