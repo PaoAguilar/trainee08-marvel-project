@@ -21,7 +21,6 @@ export type Action = {
     | 'REMOVE_BOOKMARK'
     | 'DELETE_ALL_BOOKMARKS'
     | 'HIDE_RESOURCE'
-    | 'SET_CLICK';
   payload?: {
     characters?: Character[];
     character?: Character;
@@ -137,32 +136,41 @@ export const reducer = (state: State, action: Action): State => {
     }
     case 'SET_BOOKMARK_CHARACTER': {
       const bookmarkCharacter = action.payload?.bookmarkCharacter!;
-      const bookmark = {
-        ...state.bookmark,
-        characters: [...state.bookmark.characters, bookmarkCharacter],
-      };
-      localStorage.setItem('BOOKMARKS', JSON.stringify(bookmark));
-      if (bookmarkCharacter) return { ...state, bookmark };
+      if (
+        !state.bookmark.characters.find((e) => e.id === bookmarkCharacter.id)
+      ) {
+        const bookmark = {
+          ...state.bookmark,
+          characters: [...state.bookmark.characters, bookmarkCharacter],
+        };
+        localStorage.setItem('BOOKMARKS', JSON.stringify(bookmark));
+        if (bookmarkCharacter) return { ...state, bookmark };
+      }
       break;
     }
     case 'SET_BOOKMARK_COMIC': {
       const bookmarkComic = action.payload?.bookmarkComic!;
-      const bookmark = {
-        ...state.bookmark,
-        comics: [...state.bookmark.comics, bookmarkComic],
-      };
-      localStorage.setItem('BOOKMARKS', JSON.stringify(bookmark));
-      if (bookmarkComic) return { ...state, bookmark };
+      if (!state.bookmark.comics.find((e) => e.id === bookmarkComic.id)) {
+        const bookmark = {
+          ...state.bookmark,
+          comics: [...state.bookmark.comics, bookmarkComic],
+        };
+        localStorage.setItem('BOOKMARKS', JSON.stringify(bookmark));
+        if (bookmarkComic) return { ...state, bookmark };
+      }
       break;
     }
     case 'SET_BOOKMARK_STORY': {
       const bookmarkStory = action.payload?.bookmarkStory!;
-      const bookmark = {
-        ...state.bookmark,
-        stories: [...state.bookmark.stories, bookmarkStory],
-      };
-      localStorage.setItem('BOOKMARKS', JSON.stringify(bookmark));
-      if (bookmarkStory) return { ...state, bookmark };
+      if (!state.bookmark.stories.find((e) => e.id === bookmarkStory.id)) {
+        const bookmark = {
+          ...state.bookmark,
+          stories: [...state.bookmark.stories, bookmarkStory],
+        };
+        localStorage.setItem('BOOKMARKS', JSON.stringify(bookmark));
+        if (bookmarkStory) return { ...state, bookmark };
+      }
+
       break;
     }
     case 'GET_BOOKMARKS': {
@@ -212,12 +220,6 @@ export const reducer = (state: State, action: Action): State => {
           bookmark: { comics: [], characters: [], stories: [] },
         };
       }
-      break;
-    }
-    case 'SET_CLICK': {
-      const click = action.payload?.click;
-      localStorage.setItem('CLICK', JSON.stringify(click));
-      if (click === true) return { ...state, click };
       break;
     }
     case 'HIDE_RESOURCE': {
