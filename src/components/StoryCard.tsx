@@ -7,7 +7,13 @@ import { useGlobalContex } from '../context/GlobalContext';
 import { Story } from '../types/interfaces';
 import { useState } from 'react';
 
-const StoryCard = ({ story }: { story: Story }) => {
+const StoryCard = ({
+  story,
+  hideButton,
+}: {
+  story: Story;
+  hideButton: boolean;
+}) => {
   const history = useHistory();
   const { dispatch } = useGlobalContex();
   const [click, setClick] = useState(false);
@@ -25,53 +31,57 @@ const StoryCard = ({ story }: { story: Story }) => {
       </div>
       <div className="stories__bookmark">
         <div className="characters__bookmark">
-        {click === false ? (
-          <img
-            src={bookmarkAdd}
-            alt=""
-            onClick={() => {
-              dispatch({
-                type: 'SET_BOOKMARK_STORY',
-                payload: { bookmarkStory: story },
-              });
-              setClick(true);
-            }}
-          />
+          {click === false ? (
+            <img
+              src={bookmarkAdd}
+              alt=""
+              onClick={() => {
+                dispatch({
+                  type: 'SET_BOOKMARK_STORY',
+                  payload: { bookmarkStory: story },
+                });
+                setClick(true);
+              }}
+            />
           ) : (
-          <img
-            src={bookmarkRemove}
-            alt=""
-            onClick={() => {
-              dispatch({
-                type: 'REMOVE_BOOKMARK',
-                payload: {
-                  removeBookmark: {
-                    type: 'STORY',
-                    id: story.id,
+            <img
+              src={bookmarkRemove}
+              alt=""
+              onClick={() => {
+                dispatch({
+                  type: 'REMOVE_BOOKMARK',
+                  payload: {
+                    removeBookmark: {
+                      type: 'STORY',
+                      id: story.id,
+                    },
                   },
-                },
-              });
-              setClick(false);
-            }}
-          />
+                });
+                setClick(false);
+              }}
+            />
           )}
-          <button
-            type="button"
-            className="comics__hide"
-            onClick={() => {
-              dispatch({
-                type: 'HIDE_RESOURCE',
-                payload: {
-                  hideResource: {
-                    type: 'STORY',
-                    id: story.id,
+          {hideButton === true ? (
+            <></>
+          ) : (
+            <button
+              type="button"
+              className="comics__hide"
+              onClick={() => {
+                dispatch({
+                  type: 'HIDE_RESOURCE',
+                  payload: {
+                    hideResource: {
+                      type: 'STORY',
+                      id: story.id,
+                    },
                   },
-                },
-              });
-            }}
-          >
-            hide
-          </button>
+                });
+              }}
+            >
+              hide
+            </button>
+          )}
         </div>
       </div>
     </div>

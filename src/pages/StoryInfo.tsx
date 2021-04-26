@@ -19,6 +19,7 @@ const StoryInfo = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPageComic, setCurrentPageComic] = useState<number>(1);
   const [total, setTotal] = useState(0);
+  const hideButton = true
 
   useEffect(() => {
     getStory(storyId).then((response) => {
@@ -69,7 +70,7 @@ const StoryInfo = () => {
       {storyCharacters?.length === 0 ? <> </> : <h1>CHARACTERS</h1>}
       <div className="characters">
         {storyCharacters?.map((character: Character) => {
-          return <CharacterCard key={character.id} character={character} />;
+          return <CharacterCard key={character.id} character={character} hideButton={hideButton}/>;
         })}
       </div>
       {storyCharacters?.length === 0 ? (
@@ -84,7 +85,7 @@ const StoryInfo = () => {
       {storyComics?.length === 0 ? <> </> : <h1>COMICS</h1>}
       <div className="comics">
         {storyComics?.map((comic: Comic) => {
-          return <ComicCard key={comic.id} comic={comic} />;
+          return <ComicCard key={comic.id} comic={comic} hideButton={hideButton}/>;
         })}
       </div>
       {storyComics?.length === 0 ? (

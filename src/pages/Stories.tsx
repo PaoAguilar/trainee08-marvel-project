@@ -17,6 +17,7 @@ const Stories = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [filterBy, setFilterBy] = useState('');
   const { stories } = state;
+  const hideButton = false;
   const debouncedSearchTerm = useDebounce(searchTerm, 1000);
 
   useEffect(() => {
@@ -99,7 +100,7 @@ const Stories = () => {
           />
           <div className="stories">
             {stories?.map((story: Story) => {
-              return <StoryCard key={story.id} story={story} />;
+              return <StoryCard key={story.id} story={story} hideButton={hideButton}/>;
             })}
           </div>
           <Pagination

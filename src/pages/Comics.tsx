@@ -22,6 +22,7 @@ const Comics = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [filterBy, setFilterBy] = useState('');
   const { comics } = state;
+  const hideButton = false
 
   const debouncedSearchTerm = useDebounce(searchTerm, 1000);
 
@@ -136,7 +137,7 @@ const Comics = () => {
           />
           <div className="comics">
             {comics?.map((comic: Comic) => {
-              return <ComicCard key={comic.id} comic={comic} />;
+              return <ComicCard key={comic.id} comic={comic} hideButton={hideButton}/>;
             })}
           </div>
           <Pagination

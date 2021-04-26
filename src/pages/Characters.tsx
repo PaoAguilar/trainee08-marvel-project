@@ -23,6 +23,7 @@ const Characters = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [filterBy, setFilterBy] = useState('');
   const { characters } = state;
+  const hideButton = false
 
   const debouncedSearchTerm = useDebounce(searchTerm, 1000);
 
@@ -134,7 +135,7 @@ const Characters = () => {
           />
           <div className="characters">
             {characters?.map((character: Character) => {
-              return <CharacterCard key={character.id} character={character} />;
+              return <CharacterCard key={character.id} character={character} hideButton={hideButton}/>;
             })}
           </div>
           <Pagination

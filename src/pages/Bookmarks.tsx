@@ -9,6 +9,7 @@ import '../styles/bookmark.scss';
 const Bookmarks = () => {
   const { state, dispatch } = useGlobalContex();
   const { characters, comics, stories } = state.bookmark;
+  const hideButton = true;
 
   return (
     <div>
@@ -35,19 +36,29 @@ const Bookmarks = () => {
       {characters?.length === 0 ? <> </> : <h2>CHARACTERS</h2>}
       <div className="characters">
         {characters?.map((character: Character) => {
-          return <CharacterCard key={character.id} character={character} />;
+          return (
+            <CharacterCard
+              key={character.id}
+              character={character}
+              hideButton={hideButton}
+            />
+          );
         })}
       </div>
       {comics?.length === 0 ? <> </> : <h2>COMICS</h2>}
       <div className="comics">
         {comics?.map((comic: Comic) => {
-          return <ComicCard key={comic.id} comic={comic} />;
+          return (
+            <ComicCard key={comic.id} comic={comic} hideButton={hideButton} />
+          );
         })}
       </div>
       {stories?.length === 0 ? <> </> : <h2>STORIES</h2>}
       <div className="stories">
         {stories?.map((story: Story) => {
-          return <StoryCard key={story.id} story={story} />;
+          return (
+            <StoryCard key={story.id} story={story} hideButton={hideButton} />
+          );
         })}
       </div>
     </div>

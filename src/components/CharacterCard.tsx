@@ -6,8 +6,13 @@ import bookmarkRemove from '../img/bookblack.png';
 import { useGlobalContex } from '../context/GlobalContext';
 import { Character } from '../types/interfaces';
 
-
-const CharacterCard = ({ character }: { character: Character }) => {
+const CharacterCard = ({
+  character,
+  hideButton,
+}: {
+  character: Character;
+  hideButton: boolean;
+}) => {
   const history = useHistory();
   const { dispatch } = useGlobalContex();
   const [click, setClick] = useState(false);
@@ -58,23 +63,27 @@ const CharacterCard = ({ character }: { character: Character }) => {
               }}
             />
           )}
-          <button
-            type="button"
-            className="characters__hide"
-            onClick={() => {
-              dispatch({
-                type: 'HIDE_RESOURCE',
-                payload: {
-                  hideResource: {
-                    type: 'CHARACTER',
-                    id: character.id,
+          {hideButton === true ? (
+            <></>
+          ) : (
+            <button
+              type="button"
+              className="characters__hide"
+              onClick={() => {
+                dispatch({
+                  type: 'HIDE_RESOURCE',
+                  payload: {
+                    hideResource: {
+                      type: 'CHARACTER',
+                      id: character.id,
+                    },
                   },
-                },
-              });
-            }}
-          >
-            hide
-          </button>
+                });
+              }}
+            >
+              hide
+            </button>
+          )}
         </div>
       </div>
     </div>
