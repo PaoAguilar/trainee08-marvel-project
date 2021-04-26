@@ -28,39 +28,56 @@ const CharacterCard = ({ character }: { character: Character }) => {
         <span>{character.name}</span>
         <div className="characters__bookmark">
           {/* {click === false ? ( */}
-            <img
-              src={bookmarkAdd}
-              alt=""
-              onClick={() => {
-                dispatch({
-                  type: 'SET_BOOKMARK_CHARACTER',
-                  payload: { bookmarkCharacter: character },
-                });
-                dispatch({
-                  type: 'SET_CLICK',
-                  payload: { click: true }
-                });
-                // setClick(true);
-              }}
-            />
-           {/* ) : (  */}
-            <img
-              src={bookmarkRemove}
-              alt=""
-              onClick={() => {
-                dispatch({
-                  type: 'REMOVE_BOOKMARK',
-                  payload: {
-                    removeBookmark: {
-                      type: 'CHARACTER',
-                      id: character.id,
-                    },
+          <img
+            src={bookmarkAdd}
+            alt=""
+            onClick={() => {
+              dispatch({
+                type: 'SET_BOOKMARK_CHARACTER',
+                payload: { bookmarkCharacter: character },
+              });
+              dispatch({
+                type: 'SET_CLICK',
+                payload: { click: true },
+              });
+              // setClick(true);
+            }}
+          />
+          {/* ) : (  */}
+          <img
+            src={bookmarkRemove}
+            alt=""
+            onClick={() => {
+              dispatch({
+                type: 'REMOVE_BOOKMARK',
+                payload: {
+                  removeBookmark: {
+                    type: 'CHARACTER',
+                    id: character.id,
                   },
-                });
-                // setClick(false);
-              }}
-            />
-         {/* )}  */}
+                },
+              });
+              // setClick(false);
+            }}
+          />
+          <button
+            type="button"
+            className="characters__hide"
+            onClick={() => {
+              dispatch({
+                type: 'HIDE_RESOURCE',
+                payload: {
+                  hideResource: {
+                    type: 'CHARACTER',
+                    id: character.id,
+                  },
+                },
+              });
+            }}
+          >
+            hide
+          </button>
+          {/* )}  */}
         </div>
       </div>
     </div>

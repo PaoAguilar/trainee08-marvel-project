@@ -20,8 +20,9 @@ export type Action = {
     | 'GET_BOOKMARKS'
     | 'REMOVE_BOOKMARK'
     | 'DELETE_ALL_BOOKMARKS'
-    | 'SET_CLICK'
-    // | 'SET_BOOKMARK_ITEM'
+    | 'HIDE_RESOURCE'
+    | 'SET_CLICK';
+  // | 'SET_BOOKMARK_ITEM'
   payload?: {
     characters?: Character[];
     character?: Character;
@@ -39,6 +40,10 @@ export type Action = {
     bookmarkComic?: Comic;
     bookmarkStory?: Story;
     removeBookmark?: {
+      type: string;
+      id: number;
+    };
+    hideResource?: {
       type: string;
       id: number;
     };
@@ -60,12 +65,12 @@ export interface State {
   storyComics?: Comic[] | null;
   storyCharacters?: Character[] | null;
   bookmark: {
-    comics: Comic[],
-    characters: Character[],
-    stories: Story[]
-  },
-  click?: boolean
-} 
+    comics: Comic[];
+    characters: Character[];
+    stories: Story[];
+  };
+  click?: boolean;
+}
 
 export const reducer = (state: State, action: Action): State => {
   const { type } = action;
@@ -135,8 +140,8 @@ export const reducer = (state: State, action: Action): State => {
       const bookmarkCharacter = action.payload?.bookmarkCharacter!;
       const bookmark = {
         ...state.bookmark,
-        characters: [...state.bookmark.characters, bookmarkCharacter]
-      }
+        characters: [...state.bookmark.characters, bookmarkCharacter],
+      };
       localStorage.setItem('BOOKMARKS', JSON.stringify(bookmark));
       if (bookmarkCharacter) return { ...state, bookmark };
       break;
@@ -145,26 +150,26 @@ export const reducer = (state: State, action: Action): State => {
       const bookmarkComic = action.payload?.bookmarkComic!;
       const bookmark = {
         ...state.bookmark,
-        comics: [...state.bookmark.comics, bookmarkComic]
-      }
+        comics: [...state.bookmark.comics, bookmarkComic],
+      };
       localStorage.setItem('BOOKMARKS', JSON.stringify(bookmark));
-      if (bookmarkComic) return {...state, bookmark}
+      if (bookmarkComic) return { ...state, bookmark };
       break;
     }
     case 'SET_BOOKMARK_STORY': {
       const bookmarkStory = action.payload?.bookmarkStory!;
       const bookmark = {
         ...state.bookmark,
-        stories: [...state.bookmark.stories, bookmarkStory]
-      }
+        stories: [...state.bookmark.stories, bookmarkStory],
+      };
       localStorage.setItem('BOOKMARKS', JSON.stringify(bookmark));
-      if (bookmarkStory) return {...state, bookmark}
+      if (bookmarkStory) return { ...state, bookmark };
       break;
     }
     case 'GET_BOOKMARKS': {
-      if(localStorage.getItem('BOOKMARKS')){
+      if (localStorage.getItem('BOOKMARKS')) {
         const bookmark = JSON.parse(localStorage.getItem('BOOKMARKS')!);
-        return {...state, bookmark}
+        return { ...state, bookmark };
       }
       break;
     }
@@ -203,16 +208,35 @@ export const reducer = (state: State, action: Action): State => {
     case 'DELETE_ALL_BOOKMARKS': {
       if (localStorage.getItem('BOOKMARKS')) {
         localStorage.removeItem('BOOKMARKS');
-        return { ...state, bookmark:{comics:[],characters:[],stories:[]} };
+        return {
+          ...state,
+          bookmark: { comics: [], characters: [], stories: [] },
+        };
       }
       break;
     }
     case 'SET_CLICK': {
       const click = action.payload?.click;
       localStorage.setItem('CLICK', JSON.stringify(click));
-      // const clickState = [...state, click]
-      if (click === true) return {...state, click}
+      if (click === true) return { ...state, click };
       break;
+    }
+    case 'HIDE_RESOURCE': {
+      const resourceId = action.payload?.hideResource?.id;
+      const resourceType = action.payload?.hideResource?.type;
+      if (resourceType === 'COMIC') {
+        const comicsList = state.comics;
+        const comics = comicsList!.filter((el) => el.id !== resourceId);
+        return { ...state, comics };
+      } else if (resourceType === 'CHARACTER') {
+        const charactersList = state.characters;
+        const characters = charactersList!.filter((el) => el.id !== resourceId);
+        return { ...state, characters };
+      } else if (resourceType === 'STORY') {
+        const storiesList = state.stories;
+        const stories = storiesList!.filter((el) => el.id !== resourceId);
+        return { ...state, stories };
+      }
     }
   }
   return { ...state };

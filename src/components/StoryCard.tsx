@@ -47,6 +47,23 @@ const StoryCard = ({ story }: { story: Story }) => {
               });
             }}
           />
+          <button
+            type="button"
+            className="comics__hide"
+            onClick={() => {
+              dispatch({
+                type: 'HIDE_RESOURCE',
+                payload: {
+                  hideResource: {
+                    type: 'STORY',
+                    id: story.id,
+                  },
+                },
+              });
+            }}
+          >
+            hide
+          </button>
         </div>
       </div>
     </div>

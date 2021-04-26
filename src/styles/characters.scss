@@ -34,7 +34,7 @@
 
   &__info {
     width: 20rem;
-    height: 3rem;
+    height: 3.5rem;
     border: 3px solid white;
     background-color: white;
     margin-bottom: 2rem;
@@ -45,11 +45,17 @@
     display: flex;
     flex-wrap: wrap;
     height: 3rem;
-    // width: 4rem;
     img {
       width: 2rem;
       height: 2rem;
     }
+    img:hover {
+      transform: scale(1.13);
+    }
+  }
+  &__hide {
+    width: 3rem;
+    height: 2rem;
   }
 }
 

@@ -49,6 +49,24 @@ const ComicCard = ({ comic }: { comic: Comic }) => {
               });
             }}
           />
+          <button
+            type="button"
+            className="comics__hide"
+            onClick={() => {
+              dispatch({
+                type: 'HIDE_RESOURCE',
+                payload: {
+                  hideResource: {
+                    type: 'COMIC',
+                    id: comic.id,
+                  },
+                },
+              });
+              // setClick(false);
+            }}
+          >
+            hide
+          </button>
         </div>
       </div>
     </div>
